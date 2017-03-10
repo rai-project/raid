@@ -1,78 +1,87 @@
-// Copyright © 2017 NAME HERE <EMAIL ADDRESS>
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package cmd
 
 import (
-	"fmt"
 	"os"
 
+	"github.com/fatih/color"
+	"github.com/rai-project/client"
+	"github.com/rai-project/cmd"
+	"github.com/rai-project/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
-var cfgFile string
+var (
+	isColor   bool
+	isVerbose bool
+	isDebug   bool
+)
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "raid",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-// Uncomment the following line if your bare application
-// has an action associated with it:
-//	Run: func(cmd *cobra.Command, args []string) { },
+	Use:          "raid",
+	Short:        "The server is used to accept jobs from the rai queue.",
+	SilenceUsage: true,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		client, err := client.New(
+			client.Directory(workingDir),
+			client.Stdout(os.Stdout),
+			client.Stderr(os.Stderr),
+		)
+		if err != nil {
+			return err
+		}
+		if err := client.Validate(); err != nil {
+			return err
+		}
+		if err := client.Init(); err != nil {
+			return err
+		}
+		if err := client.Upload(); err != nil {
+			return err
+		}
+		if err := client.Connect(); err != nil {
+			return err
+		}
+		defer client.Disconnect()
+		return nil
+	},
 }
 
-// Execute adds all child commands to the root command sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := RootCmd.Execute(); err != nil {
-		fmt.Println(err)
 		os.Exit(-1)
 	}
 }
 
 func init() {
-	cobra.OnInitialize(initConfig)
+	cobra.OnInitialize(initConfig, initColor)
 
-	// Here you will define your flags and configuration settings.
-	// Cobra supports Persistent Flags, which, if defined here,
-	// will be global for your application.
+	RootCmd.AddCommand(cmd.VersionCmd)
+	RootCmd.AddCommand(cmd.LicenseCmd)
+	RootCmd.AddCommand(cmd.EnvCmd)
 
-	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.raid.yaml)")
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	RootCmd.PersistentFlags().StringVarP(&appsecret, "secret", "s", "", "Pass in application secret.")
+	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", color.NoColor, "Toggle color output.")
+	RootCmd.PersistentFlags().BoolVarP(&isVerbose, "verbose", "v", false, "Toggle verbose mode.")
+	RootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "Toggle debug mode.")
+
+	// mark secret flag hidden
+	RootCmd.PersistentFlags().MarkHidden("secret")
+
+	viper.BindPFlag("app.secret", RootCmd.PersistentFlags().Lookup("secret"))
+	viper.BindPFlag("app.debug", RootCmd.PersistentFlags().Lookup("debug"))
+	viper.BindPFlag("app.verbose", RootCmd.PersistentFlags().Lookup("verbose"))
+	viper.BindPFlag("app.color", RootCmd.PersistentFlags().Lookup("color"))
 }
 
-// initConfig reads in config file and ENV variables if set.
 func initConfig() {
-	if cfgFile != "" { // enable ability to specify config file via flag
-		viper.SetConfigFile(cfgFile)
-	}
+	config.Init(
+		config.AppName("raid"),
+		config.AppSecret(appsecret),
+	)
+}
 
-	viper.SetConfigName(".raid") // name of config file (without extension)
-	viper.AddConfigPath("$HOME")  // adding home directory as first search path
-	viper.AutomaticEnv()          // read in environment variables that match
-
-	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-		fmt.Println("Using config file:", viper.ConfigFileUsed())
-	}
+func initColor() {
+	color.NoColor = !isColor
 }
