@@ -2,13 +2,17 @@ package cmd
 
 import (
 	"os"
+	"runtime/pprof"
+	"syscall"
 
 	"github.com/fatih/color"
+	"github.com/k0kubun/pp"
 	"github.com/rai-project/cmd"
 	"github.com/rai-project/config"
 	"github.com/rai-project/server"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/vrecan/death"
 )
 
 var (
@@ -18,6 +22,13 @@ var (
 	inShutdown int32
 )
 
+type prof struct{}
+
+func (c prof) Close() error {
+	pprof.StopCPUProfile()
+	return nil
+}
+
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:          "raid",
@@ -25,7 +36,7 @@ var RootCmd = &cobra.Command{
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		signalNotify(interrupt)
+		death := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
 
 		server, err := server.New(
 			server.Stdout(os.Stdout),
@@ -37,25 +48,17 @@ var RootCmd = &cobra.Command{
 			return err
 		}
 
-		quitting := make(chan struct{})
-		go handleInterrupt(interrupt, quitting, server)
-
 		if err := server.Connect(); err != nil {
-			if err != nil {
-				// If the underlying listening is closed, Serve returns an error
-				// complaining about listening on a closed socket. This is expected, so
-				// let's ignore the error if we are the ones who explicitly closed the
-				// socket.
-				select {
-				case <-quitting:
-					return nil
-				default:
-					return err
-				}
-			}
+			return err
 		}
-		<-quitting
-		println("quit")
+		pp.Println(config.IsDebug || config.IsVerbose)
+
+		if config.IsDebug || config.IsVerbose {
+			death.SetLogger(log)
+		}
+
+		death.WaitForDeath(server, prof{})
+
 		return nil
 	},
 }

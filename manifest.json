@@ -1,0 +1,34 @@
+{
+    "dependencies": {
+        "github.com/Sirupsen/logrus": {
+            "branch": "master"
+        },
+        "github.com/fatih/color": {
+            "branch": "master"
+        },
+        "github.com/k0kubun/pp": {
+            "branch": "master"
+        },
+        "github.com/rai-project/cmd": {
+            "branch": "master"
+        },
+        "github.com/rai-project/config": {
+            "branch": "master"
+        },
+        "github.com/rai-project/logger": {
+            "branch": "master"
+        },
+        "github.com/rai-project/server": {
+            "branch": "master"
+        },
+        "github.com/spf13/cobra": {
+            "branch": "master"
+        },
+        "github.com/spf13/viper": {
+            "branch": "master"
+        },
+        "github.com/vrecan/death": {
+            "branch": "master"
+        }
+    }
+}

@@ -1,0 +1,15 @@
+package: github.com/rai-project/raid
+import:
+- package: github.com/Sirupsen/logrus
+  version: ~0.11.4
+- package: github.com/fatih/color
+  version: ~1.4.1
+- package: github.com/k0kubun/pp
+  version: ~2.3.0
+- package: github.com/rai-project/cmd
+- package: github.com/rai-project/config
+- package: github.com/rai-project/logger
+- package: github.com/rai-project/server
+- package: github.com/spf13/cobra
+- package: github.com/spf13/viper
+- package: github.com/vrecan/death
