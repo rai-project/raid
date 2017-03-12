@@ -77,6 +77,8 @@ func init() {
 	RootCmd.AddCommand(cmd.VersionCmd)
 	RootCmd.AddCommand(cmd.LicenseCmd)
 	RootCmd.AddCommand(cmd.EnvCmd)
+	RootCmd.AddCommand(cmd.GendocCmd)
+	RootCmd.AddCommand(cmd.CompletionCmd)
 
 	RootCmd.PersistentFlags().StringVarP(&appsecret, "secret", "s", "", "Pass in application secret.")
 	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", !color.NoColor, "Toggle color output.")
