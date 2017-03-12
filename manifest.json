@@ -3,10 +3,13 @@
         "github.com/Sirupsen/logrus": {
             "branch": "master"
         },
+        "github.com/coreos/go-systemd": {
+            "branch": "master"
+        },
         "github.com/fatih/color": {
             "branch": "master"
         },
-        "github.com/k0kubun/pp": {
+        "github.com/pkg/errors": {
             "branch": "master"
         },
         "github.com/rai-project/cmd": {

@@ -1,5 +1,5 @@
 {
-    "memo": "b835abf06d94b60f7df37d9ed240c45c87f1201c74c314f2f3c20b413f0bb74e",
+    "memo": "9e3951bb9a5431c5e9cc57a514e8d40cbe3432164b0b5db77385f5829c192089",
     "projects": [
         {
             "name": "github.com/Azure/go-ansiterm",
@@ -8,6 +8,14 @@
             "packages": [
                 ".",
                 "winterm"
+            ]
+        },
+        {
+            "name": "github.com/BenLubar/memoize",
+            "branch": "master",
+            "revision": "6fdb23a94b2412102e3e791f13122f440a2b8cd5",
+            "packages": [
+                "."
             ]
         },
         {
@@ -76,7 +84,12 @@
                 "private/protocol/query",
                 "private/protocol/query/queryutil",
                 "private/protocol/rest",
+                "private/protocol/restxml",
                 "private/protocol/xml/xmlutil",
+                "private/waiter",
+                "service/s3",
+                "service/s3/s3iface",
+                "service/s3/s3manager",
                 "service/sqs",
                 "service/sts"
             ]
@@ -93,6 +106,14 @@
             "name": "github.com/cenkalti/backoff",
             "branch": "master",
             "revision": "b02f2bbce11d7ea6b97f282ef1771b0fe2f65ef3",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/cheggaaa/pb",
+            "branch": "master",
+            "revision": "d7e6ca3010b6f084d8056847f55d7f572f180678",
             "packages": [
                 "."
             ]
@@ -177,6 +198,8 @@
                 "client",
                 "dockerversion",
                 "opts",
+                "pkg/archive",
+                "pkg/fileutils",
                 "pkg/homedir",
                 "pkg/httputils",
                 "pkg/idtools",
@@ -185,6 +208,7 @@
                 "pkg/jsonmessage",
                 "pkg/longpath",
                 "pkg/parsers/kernel",
+                "pkg/pools",
                 "pkg/promise",
                 "pkg/random",
                 "pkg/stdcopy",
@@ -387,6 +411,14 @@
             ]
         },
         {
+            "name": "github.com/mattn/go-runewidth",
+            "branch": "master",
+            "revision": "14207d285c6c197daabb5c9793d63e7af9ab2d50",
+            "packages": [
+                "."
+            ]
+        },
+        {
             "name": "github.com/mattn/go-shellwords",
             "branch": "master",
             "revision": "005a0944d84452842197c2108bd9168ced206f78",
@@ -423,6 +455,7 @@
             "version": "v0.1.1",
             "revision": "baf6536d6259209c3edfa2b22237af82942d3dfa",
             "packages": [
+                "libcontainer/system",
                 "libcontainer/user"
             ]
         },
@@ -451,9 +484,17 @@
             ]
         },
         {
+            "name": "github.com/rai-project/archive",
+            "branch": "master",
+            "revision": "4e116183e2d7f8162c6e9333fef72d9760b6e700",
+            "packages": [
+                "."
+            ]
+        },
+        {
             "name": "github.com/rai-project/auth",
             "branch": "master",
-            "revision": "a68bad471852a2ad41f7610e73e1929988b2aad2",
+            "revision": "227aa4301b2eb49fba3bb37119c1067008ee29ab",
             "packages": [
                 "."
             ]
@@ -461,7 +502,7 @@
         {
             "name": "github.com/rai-project/aws",
             "branch": "master",
-            "revision": "c55233701900cd5b7fee9d59dd1cf5d8fbdbd1bf",
+            "revision": "d6c35048d75b41cca52243483e5592c6f35ded98",
             "packages": [
                 "."
             ]
@@ -469,7 +510,7 @@
         {
             "name": "github.com/rai-project/broker",
             "branch": "master",
-            "revision": "9f080aae2718c9f47ea1003ded5dfbeff7247a09",
+            "revision": "8feaacf20642ee849e61d5d70b9c23eb6ab316df",
             "packages": [
                 ".",
                 "sqs"
@@ -478,7 +519,7 @@
         {
             "name": "github.com/rai-project/cmd",
             "branch": "master",
-            "revision": "67cca8b1c3b9e9cb830f75cdc092e1e2b201adbe",
+            "revision": "4df453af7ff9ac5dcabd8f2920b38177e281a04d",
             "packages": [
                 "."
             ]
@@ -486,7 +527,7 @@
         {
             "name": "github.com/rai-project/config",
             "branch": "master",
-            "revision": "3cdd1d24b21e8735c63a591b04b3decd16138e13",
+            "revision": "bb92b2637052f99a9428a998029fd0018d935a6b",
             "packages": [
                 "."
             ]
@@ -502,7 +543,7 @@
         {
             "name": "github.com/rai-project/docker",
             "branch": "master",
-            "revision": "6f18b0cfd4d50b0be2f8b2204c575fc6dc4b29a5",
+            "revision": "a5b9b5c98ed80dc30de05e3b44b4061aaa4fc2fa",
             "packages": [
                 ".",
                 "cuda"
@@ -527,7 +568,7 @@
         {
             "name": "github.com/rai-project/logger",
             "branch": "master",
-            "revision": "03818fe07fa7d04ed67bb0a30bba6fa771c216a6",
+            "revision": "18cb3edb6ab2e424faa3c96d988b2237b6cd8e65",
             "packages": [
                 "."
             ]
@@ -535,7 +576,7 @@
         {
             "name": "github.com/rai-project/model",
             "branch": "master",
-            "revision": "5692b2e72b6f42787ef18a1da9fd237d33e071fd",
+            "revision": "d16696c980bb9ef22f9a33111a1723bafa21543a",
             "packages": [
                 "."
             ]
@@ -543,7 +584,7 @@
         {
             "name": "github.com/rai-project/nvidia-smi",
             "branch": "master",
-            "revision": "3366529912715a865639d18c2a33651c9951d1dc",
+            "revision": "25a462f7ffda09a652494cc852852dae33fc0e18",
             "packages": [
                 "."
             ]
@@ -551,7 +592,7 @@
         {
             "name": "github.com/rai-project/pubsub",
             "branch": "master",
-            "revision": "fd7b342428ee44f2cf87641872b77c58d65363ee",
+            "revision": "7c24be023cdd5ce9a324d87e71a08fa108c25493",
             "packages": [
                 ".",
                 "redis"
@@ -570,9 +611,18 @@
         {
             "name": "github.com/rai-project/server",
             "branch": "master",
-            "revision": "3804775063a343d3b0ac9a7c32db909af5d12790",
+            "revision": "21606c0cf09ab8edd2c21a6ec6ad23e0ff065da0",
             "packages": [
                 "."
+            ]
+        },
+        {
+            "name": "github.com/rai-project/store",
+            "branch": "master",
+            "revision": "75388738f2441c7199fe8277b675c5e643f54f7f",
+            "packages": [
+                ".",
+                "s3"
             ]
         },
         {
@@ -643,7 +693,7 @@
         {
             "name": "github.com/spf13/cobra",
             "branch": "master",
-            "revision": "92ea23a837e66f46ac9e7d04fa826602b7b0a42d",
+            "revision": "16c014f1a19d865b765b420e74508f80eb831ada",
             "packages": [
                 ".",
                 "doc"
