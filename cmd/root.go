@@ -4,17 +4,18 @@ import (
 	"os"
 
 	"github.com/fatih/color"
-	"github.com/rai-project/client"
 	"github.com/rai-project/cmd"
 	"github.com/rai-project/config"
+	"github.com/rai-project/server"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
 var (
-	isColor   bool
-	isVerbose bool
-	isDebug   bool
+	isColor    bool
+	isVerbose  bool
+	isDebug    bool
+	inShutdown int32
 )
 
 // RootCmd represents the base command when called without any subcommands
@@ -23,27 +24,38 @@ var RootCmd = &cobra.Command{
 	Short:        "The server is used to accept jobs from the rai queue.",
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client, err := client.New(
-			client.Directory(workingDir),
-			client.Stdout(os.Stdout),
-			client.Stderr(os.Stderr),
+
+		signalNotify(interrupt)
+
+		server, err := server.New(
+			server.Stdout(os.Stdout),
+			server.Stderr(os.Stderr),
+			server.NumWorkers(1),
+			server.JobQueueName("rai"),
 		)
 		if err != nil {
 			return err
 		}
-		if err := client.Validate(); err != nil {
-			return err
+
+		quitting := make(chan struct{})
+		go handleInterrupt(interrupt, quitting, server)
+
+		if err := server.Connect(); err != nil {
+			if err != nil {
+				// If the underlying listening is closed, Serve returns an error
+				// complaining about listening on a closed socket. This is expected, so
+				// let's ignore the error if we are the ones who explicitly closed the
+				// socket.
+				select {
+				case <-quitting:
+					return nil
+				default:
+					return err
+				}
+			}
 		}
-		if err := client.Init(); err != nil {
-			return err
-		}
-		if err := client.Upload(); err != nil {
-			return err
-		}
-		if err := client.Connect(); err != nil {
-			return err
-		}
-		defer client.Disconnect()
+		<-quitting
+		println("quit")
 		return nil
 	},
 }
