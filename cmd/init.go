@@ -25,7 +25,7 @@ func (d dlog) Warn(v ...interface{}) error {
 }
 
 func init() {
-	config.OnInit(func() {
+	config.AfterInit(func() {
 		log = dlog{logger.New().WithField("pkg", "raid")}
 	})
 }

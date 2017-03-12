@@ -6,7 +6,6 @@ import (
 	"syscall"
 
 	"github.com/fatih/color"
-	"github.com/k0kubun/pp"
 	"github.com/rai-project/cmd"
 	"github.com/rai-project/config"
 	"github.com/rai-project/server"
@@ -29,6 +28,15 @@ func (c prof) Close() error {
 	return nil
 }
 
+func serverOptions() []server.Option {
+	return []server.Option{
+		server.Stdout(os.Stdout),
+		server.Stderr(os.Stderr),
+		server.NumWorkers(1),
+		server.JobQueueName("rai"),
+	}
+}
+
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:          "raid",
@@ -38,12 +46,7 @@ var RootCmd = &cobra.Command{
 
 		death := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
 
-		server, err := server.New(
-			server.Stdout(os.Stdout),
-			server.Stderr(os.Stderr),
-			server.NumWorkers(1),
-			server.JobQueueName("rai"),
-		)
+		server, err := server.New(serverOptions()...)
 		if err != nil {
 			return err
 		}
@@ -51,7 +54,6 @@ var RootCmd = &cobra.Command{
 		if err := server.Connect(); err != nil {
 			return err
 		}
-		pp.Println(config.IsDebug || config.IsVerbose)
 
 		if config.IsDebug || config.IsVerbose {
 			death.SetLogger(log)
