@@ -14,8 +14,6 @@ install:
 - go get github.com/tcnksm/ghr
 - go get github.com/sanbornm/go-selfupdate
 script:
-  - echo "Skip tests..."
-after_script:
 - cd ${TRAVIS_BUILD_DIR}/cmd && go generate && cd ${TRAVIS_BUILD_DIR}
 - VERSION=$(cat ./VERSION)
 - echo "VERSION = ${VERSION}"
