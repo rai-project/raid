@@ -26,6 +26,8 @@ var DaemonCmd = &cobra.Command{
 		if err != nil {
 			return errors.Wrap(err, "cannot create a systemd listiner")
 		}
+
+		return nil
 	},
 }
 
