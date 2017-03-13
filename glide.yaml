@@ -22,3 +22,7 @@ import:
 - package: github.com/vrecan/death
 - package: github.com/spf13/pflag
   version: master
+- package: github.com/docker/distribution
+  version: master
+- package: github.com/docker/docker
+  version: master
