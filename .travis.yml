@@ -29,7 +29,7 @@ deploy:
   bucket: files.rai-project.com
   local-dir: dist
   upload-dir: dist
-  acl: public_read
+  acl: private
   skip_cleanup: true
   detect_encoding: true
   on:
