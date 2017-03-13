@@ -20,3 +20,5 @@ import:
   - doc
 - package: github.com/spf13/viper
 - package: github.com/vrecan/death
+- package: github.com/spf13/pflag
+  version: master
