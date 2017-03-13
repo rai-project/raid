@@ -15,6 +15,7 @@ import:
 - package: github.com/rai-project/logger
 - package: github.com/rai-project/server
 - package: github.com/spf13/cobra
+  version: master
   subpackages:
   - doc
 - package: github.com/spf13/viper
