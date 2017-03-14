@@ -1,0 +1,2 @@
+rm -rf /var/lib/raid
+systemctl daemon-reload || true

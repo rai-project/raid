@@ -1,0 +1,2 @@
+systemd-tmpfiles --create /usr/lib/tmpfiles.d/raid.conf
+systemctl daemon-reload || true
