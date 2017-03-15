@@ -80,7 +80,7 @@ func init() {
 	RootCmd.AddCommand(cmd.GendocCmd)
 	RootCmd.AddCommand(cmd.CompletionCmd)
 
-	RootCmd.PersistentFlags().StringVarP(&appsecret, "secret", "s", "", "Pass in application secret.")
+	RootCmd.PersistentFlags().StringVarP(&config.DefaultAppSecret, "secret", "s", "", "Pass in application secret.")
 	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", !color.NoColor, "Toggle color output.")
 	RootCmd.PersistentFlags().BoolVarP(&isVerbose, "verbose", "v", false, "Toggle verbose mode.")
 	RootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "Toggle debug mode.")
