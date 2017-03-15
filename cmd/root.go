@@ -97,7 +97,6 @@ func init() {
 func initConfig() {
 	config.Init(
 		config.AppName("raid"),
-		config.AppSecret(appsecret),
 	)
 }
 
