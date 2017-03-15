@@ -18,8 +18,10 @@ script:
 - VERSION=$(cat ./VERSION)
 - echo "VERSION = ${VERSION}"
 - DIST=${TRAVIS_BUILD_DIR}/dist/raid/stable
-
-- CGO_ENABLED=0 gox -verbose  -os="linux darwin windows" -arch="amd64 386 armv5 armv6 armv7 arm64" -osarch="!darwin/arm64 linux/ppc64 linux/ppc64le" -ldflags="$(govvv -flags) -s -w -X github.com/rai-project/raid/cmd.appsecret=\"${APP_SECRET}\" -extldflags \"-static\"" -output="${DIST}/${VERSION}/{{.OS}}-{{.Arch}}/{{.Dir}}" .
+- CGO_ENABLED=0 gox -verbose  -os="linux darwin windows" -arch="amd64 386 armv5 armv6
+  armv7 arm64" -osarch="!darwin/arm64 linux/ppc64 linux/ppc64le" -ldflags="$(govvv
+  -flags) -s -w -X github.com/rai-project/raid/cmd.appsecret=\"${APP_SECRET}\" -extldflags
+  \"-static\"" -output="${DIST}/${VERSION}/{{.OS}}-{{.Arch}}/{{.Dir}}" .
 before_deploy:
 - echo "go-selfupdate generating bindiffs"
 - mkdir -p ${DIST}/${VERSION}/binaries
@@ -79,5 +81,4 @@ deploy:
     repo: rai-project/raid
 env:
   global:
-  - secure: C1knBNPjo+kdi0H5lmHW4/X9pAO0J99s5W04bs7G9A/3yTFtYTl6Qn/VYotGWxoLnaV2LYxyOzCaBg/qASvNTYAZvTxT6uwW7FSPLBdbgN8eaRl16hvvUSvBIBWULFYGvd0FGqXuf/IsDjcHMDpcOIm6H4VcpzugN/zSOb9/koq5oVWbioxhRPPia5N0d8sXniyCHS2lj3rFasg4jEgxspBgG5j9rHX34d6dAwZZTzGh07EQoELU6LmjBiphvajZBxsvqzKXFmnS4zYFVezgxIS8XxG3RfyN1vIina7hl8VURcapTKBp307jvkI6aPBTAOFtrHE5RexvPTPl5+H0r1Fw1wMeWwMWTG9NLtGx+wBb/Xk++W+EiNx2lwIpey+ozLfQE7nw9czdHilNOe1fu9Dfh5CyCGML7mlWzezY5QU/p58HWCggaCuwD0SBeD6Z+hqvMRn+iTUmPG4yHiLgf7jhYSjW+h2VGXgMw/uO7ZWrKG5/sOQ6wHIq9H6r42ns5Lf9FZ7c4Ly1CjKsmRmQMqLVHZuWY0yN6AlvKty24sXIk9Ab4XSjF89J4QYdKD9XbTInQJblbCYisbfmE3rBKOVBdo/4tD+b82jCWrINmR/+CMEPN3aNCob9IhraKKi95+Z1FICQPRN9qUJw4+x4OxqhjegxVSecpFDId2uEtZM=
-  - secure: G7oVWOfDrWdJMwJM6m2JWlEyDq+wxp4vkq+kcpmZLDHLMoXdJSZPTcwhpZu0kb+LxBeYhTAHzIK5xY4BReCu3eHyCSH6qF/KBoQuyiN97pHtvs3Oy69odvhuWxJNW0mX7UsJOmt1ZN+FK4Huc7YjL+JHl4DYsrx2lh2dxiYuvY3QldGYJcXIsJm3wzIfku9x53VsoVGlHAbZrMqgFp0jZ1dn5J12nI4iqh09DJIalzZ1dlNyyuBAHr4OiCmmKlYiljQcIU7i9Z9Q8ffNamr6rnkapOQD7WLdz1g0JDUn/AsNrXSP7yranes7iXN0yk+im997+f5yIsqwv/6IAcwe5gg9YIv6A8FckZP2ICXjyMS3U3WYCbZhFT/1S3Zf0odH/PzMQbuz3VhD+rEMXryBAg+uIooFX7Un1dr+kqEzNFP9mKGsL1IYFghII4m3YwGeq6l+OpZQ/fI3joBSe1a9QGBothInBEVXXnSaK21Hbm9rTP6+eWVLAgnejFMFceGXYjOUfdX8z1n9NllSWefkWCj9VrB8GFFpe6f3veuByfHjIvLygudHax8T4EeCpF1EYzzNu6Cy28Ga4bVX+wUgZkI7sMydySuY1jMTJM7wjSLf7h7/h1wnBd+9t4WDesaFmzWQtELLzWsGWq+jKrDrOw4FqPxW9JbI0wM8ymfqNpY=
+    secure: tf8wXElHB7N6RmHIGLzfr/K4XUlDdwIGRMuXSXnbk9bHf7t5rKGbhj3Ogbbf8/Myg4BnAnPtV7fvQL7+0KPc+9lUY5XVBIFGm5W77p85NKVVwxTT1jRtWPhuXPUQOjT5v9WQcfoHMqUNU31uJErzdo891JHENNSYbouZENec/gxbYyNAoCkcAUG1mqLHDPyUrOo6WtH5iFJm2I7GU1R590/UAJU69WRX6Aeuv2jfJYIslXxNH0AxztzDGIsgsGE8dbmosQdTmQncIHmxriNsfUjO6UvQFbJBxez+5w/xAVVgdW5Yquy8ckRhxP5sYrpiopA8oOSuCEAKyi16lGD4Jn+7N4tLA+r11qMyud7UEvcCua1BzmQXu6zRkVf3u3aWSH4LcUYozUUYXQWvWUa9Tz9ZyM4/isgxHrzUdruQDMzLaFKyydVjVyVghvmQe6PI+AdVwUXXuk0r7TKFL84B6GLMx4hN+CST5xEE9QVkSWU/iQzqCsB8J2FUBdIbLJufih9ebcw55NWjGfCjYghrLihOkyw0tYPdRdkgG82UZH2sDhy0pSQSCiguOqKmMgix8ymwdlG/IcGKqVECY5yFDgnhdxd/7gt6eX69nMZbBmBKqJ3f4G3FhGc6TU/LxMllsVktMD7IxUwP7hu3JLMzHiG0iYrS4fc6ERIWbONicrA=
