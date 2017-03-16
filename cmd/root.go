@@ -99,6 +99,7 @@ func initConfig() {
 	config.Init(
 		config.AppName("raid"),
 		config.AppSecret(AppSecret),
+		config.ConfigFileBaseName(".rai_config"),
 	)
 }
 
