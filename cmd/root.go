@@ -15,6 +15,7 @@ import (
 )
 
 var (
+	AppSecret  string
 	isColor    bool
 	isVerbose  bool
 	isDebug    bool
@@ -80,7 +81,7 @@ func init() {
 	RootCmd.AddCommand(cmd.GendocCmd)
 	RootCmd.AddCommand(cmd.CompletionCmd)
 
-	RootCmd.PersistentFlags().StringVarP(&config.DefaultAppSecret, "secret", "s", "", "Pass in application secret.")
+	RootCmd.PersistentFlags().StringVarP(&AppSecret, "secret", "s", "", "Pass in application secret.")
 	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", !color.NoColor, "Toggle color output.")
 	RootCmd.PersistentFlags().BoolVarP(&isVerbose, "verbose", "v", false, "Toggle verbose mode.")
 	RootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "Toggle debug mode.")
@@ -88,7 +89,7 @@ func init() {
 	// mark secret flag hidden
 	RootCmd.PersistentFlags().MarkHidden("secret")
 
-	viper.BindPFlag("app.secret", RootCmd.PersistentFlags().Lookup("secret"))
+	// viper.BindPFlag("app.secret", RootCmd.PersistentFlags().Lookup("secret"))
 	viper.BindPFlag("app.debug", RootCmd.PersistentFlags().Lookup("debug"))
 	viper.BindPFlag("app.verbose", RootCmd.PersistentFlags().Lookup("verbose"))
 	viper.BindPFlag("app.color", RootCmd.PersistentFlags().Lookup("color"))
@@ -97,6 +98,7 @@ func init() {
 func initConfig() {
 	config.Init(
 		config.AppName("raid"),
+		config.AppSecret(AppSecret),
 	)
 }
 
