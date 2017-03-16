@@ -40,3 +40,4 @@ cmd/raid/raid
 debug
 .DS_Store
 raid
+nohup.out
