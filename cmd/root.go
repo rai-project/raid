@@ -82,7 +82,7 @@ func init() {
 	RootCmd.AddCommand(cmd.CompletionCmd)
 
 	RootCmd.PersistentFlags().StringVarP(&AppSecret, "secret", "s", "", "Pass in application secret.")
-	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", !color.NoColor, "Toggle color output.")
+	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", true, "Toggle color output.")
 	RootCmd.PersistentFlags().BoolVarP(&isVerbose, "verbose", "v", false, "Toggle verbose mode.")
 	RootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "Toggle debug mode.")
 
