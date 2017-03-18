@@ -1,0 +1,33 @@
+app:
+  verbose: true
+  debug: true
+aws:
+  access_key_id: ==AES32==+NPjNiwCtTNvMUg94O/PVGOPc1N6ExBx7Lyz3TGRuIqVfqFoYuRNEl1gkZw=
+  secret_access_key: ==AES32==onXRqpVtlebXW+dN5atvjpZGuyNH8pzkAD7tx7diCj9rnByX9+BxlESV1ehoo7D7BtoDCDf73uLYVqXDQvdOq5JoL9AAFdIr
+  region: us-east-1
+  sts_account: 122130270846
+  sts_role: rai
+  sts_role_duration_seconds:  1h
+store:
+  provider: s3
+  base_url: http://s3.amazonaws.com
+  acl: public-read
+broker:
+  provider: sqs
+  serializer: json
+  autoack: true
+client:
+  name: rai
+  upload_bucket: files.rai-project.com
+  bucket: userdata
+  build_file: rai_build
+auth:
+  provider: auth0
+  domain: raiproject.auth0.com
+  client_id: ==AES32==6hfPO1LiIUGaAut6mdg2Zb9ggGKutPOF
+  client_secret: ==AES32==GtEMfdOuG2aQraS3COa-jKQLZftaAIzDZcsqamCt1tr0i5YhH-RY_7G6S8vKzWs-
+pubsub:
+  endpoints:
+    - pubsub.rai-project.com:6379
+  password: ==AES32==SnY+X9yvTpvVRWo+hqq1Bjup8vvYEtDURcsO2w==
+  

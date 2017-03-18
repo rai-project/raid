@@ -98,6 +98,7 @@ func init() {
 func initConfig() {
 	opts := []config.Option{
 		config.AppName("raid"),
+		config.ColorMode(isColor),
 		config.ConfigFileBaseName(".rai_config"),
 	}
 	if appSecret != "" {
