@@ -15,11 +15,11 @@ import (
 )
 
 var (
-	AppSecret  string
 	isColor    bool
 	isVerbose  bool
 	isDebug    bool
 	inShutdown int32
+	appSecret  string
 )
 
 type prof struct{}
@@ -81,7 +81,7 @@ func init() {
 	RootCmd.AddCommand(cmd.GendocCmd)
 	RootCmd.AddCommand(cmd.CompletionCmd)
 
-	RootCmd.PersistentFlags().StringVarP(&AppSecret, "secret", "s", "", "Pass in application secret.")
+	RootCmd.PersistentFlags().StringVarP(&appSecret, "secret", "s", "", "Pass in application secret.")
 	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", true, "Toggle color output.")
 	RootCmd.PersistentFlags().BoolVarP(&isVerbose, "verbose", "v", false, "Toggle verbose mode.")
 	RootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "Toggle debug mode.")
@@ -89,18 +89,21 @@ func init() {
 	// mark secret flag hidden
 	RootCmd.PersistentFlags().MarkHidden("secret")
 
-	// viper.BindPFlag("app.secret", RootCmd.PersistentFlags().Lookup("secret"))
+	viper.BindPFlag("app.secret", RootCmd.PersistentFlags().Lookup("secret"))
 	viper.BindPFlag("app.debug", RootCmd.PersistentFlags().Lookup("debug"))
 	viper.BindPFlag("app.verbose", RootCmd.PersistentFlags().Lookup("verbose"))
 	viper.BindPFlag("app.color", RootCmd.PersistentFlags().Lookup("color"))
 }
 
 func initConfig() {
-	config.Init(
+	opts := []config.Option{
 		config.AppName("raid"),
-		config.AppSecret(AppSecret),
 		config.ConfigFileBaseName(".rai_config"),
-	)
+	}
+	if appSecret != "" {
+		opts = append(opts, config.AppSecret(appSecret))
+	}
+	config.Init(opts...)
 }
 
 func initColor() {
