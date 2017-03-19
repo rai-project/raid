@@ -8,7 +8,6 @@ import (
 	"github.com/fatih/color"
 	"github.com/rai-project/cmd"
 	"github.com/rai-project/config"
-	_ "github.com/rai-project/logger/hooks"
 	"github.com/rai-project/server"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

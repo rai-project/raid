@@ -5,6 +5,7 @@ import (
 
 	"github.com/rai-project/config"
 	logger "github.com/rai-project/logger"
+	_ "github.com/rai-project/logger/hooks"
 )
 
 type dlog struct {
