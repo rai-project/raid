@@ -5,6 +5,9 @@ import (
 	"runtime/pprof"
 	"syscall"
 
+	"path/filepath"
+
+	"github.com/Unknwon/com"
 	"github.com/fatih/color"
 	"github.com/rai-project/cmd"
 	"github.com/rai-project/config"
@@ -102,8 +105,11 @@ func initConfig() {
 		config.AppName("raid"),
 		config.ColorMode(isColor),
 	}
-	if configFile != "" && comm.IsFile(configFile) {
-		opts = append(opts, config.ConfigFile(configFile))
+	if configFile != "" && com.IsFile(configFile) {
+		if c, err := filepath.Abs(configFile); err == nil {
+			configFile = c
+		}
+		opts = append(opts, config.ConfigFileAbsolutePath(configFile))
 	} else {
 		opts = append(opts, config.ConfigFileBaseName(".rai_config"))
 	}
