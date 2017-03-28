@@ -1,17 +1,27 @@
 [Unit]
 Description=RAI Server Daemon
-After=network-online.target
+Documentation=https://github.com/rai-project/raid
+After=local-fs.target network-online.target
 Wants=network-online.target systemd-networkd-wait-online.service syslog.target nvidia-persistenced.service
 Requires=docker.service
 
+
 [Service]
+Environment="CONFIG_FILE=/etc/raid/rai_config.yml"
+
 Type=simple
-ExecStart=${GOPATH}/bin/raid --config=/etc/raid/rai_config.yml
+User=raid
+PermissionsStartOnly=true
 Restart=on-failure
-ExecReload=/bin/kill -USR1 $MAINPID
+RestartSec=1
+TimeoutStartSec=0
+TimeoutStopSec=20
 PrivateTmp=true
 #ProtectHome=true
 #ProtectSystem=full
+
+ExecStart=${GOPATH}/bin/raid --config=$CONFIG_FILE
+ExecReload=/bin/kill -USR1 $MAINPID
 
 [Install]
 WantedBy=multi-user.target
