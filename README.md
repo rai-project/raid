@@ -1,10 +1,19 @@
 # raid [![Build Status](https://travis-ci.org/rai-project/raid.svg?branch=master)](https://travis-ci.org/rai-project/raid)
 
-> TODO
-
 ## Installation
 
+
+
 ## Usage
+
+
+## SystemD
+
+
+
+## Logs
+
+If `journald` is enabled, then you can view the server logs using `journalctl -f -u raid.service`
 
 
 ## License

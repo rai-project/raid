@@ -20,6 +20,7 @@ var (
 	isDebug    bool
 	inShutdown int32
 	appSecret  string
+	configFile string
 )
 
 type prof struct{}
@@ -81,7 +82,8 @@ func init() {
 	RootCmd.AddCommand(cmd.GendocCmd)
 	RootCmd.AddCommand(cmd.CompletionCmd)
 
-	RootCmd.PersistentFlags().StringVarP(&appSecret, "secret", "s", "", "Pass in application secret.")
+	RootCmd.PersistentFlags().StringVar(&configFile, "config", "", "The absolute path to the server configuration. If not set, then the configuration file is searched.")
+	RootCmd.PersistentFlags().StringVarP(&appSecret, "secret", "s", "", "The application secret.")
 	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", true, "Toggle color output.")
 	RootCmd.PersistentFlags().BoolVarP(&isVerbose, "verbose", "v", false, "Toggle verbose mode.")
 	RootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "Toggle debug mode.")
@@ -99,7 +101,11 @@ func initConfig() {
 	opts := []config.Option{
 		config.AppName("raid"),
 		config.ColorMode(isColor),
-		config.ConfigFileBaseName(".rai_config"),
+	}
+	if configFile != "" && comm.IsFile(configFile) {
+		opts = append(opts, config.ConfigFile(configFile))
+	} else {
+		opts = append(opts, config.ConfigFileBaseName(".rai_config"))
 	}
 	if appSecret != "" {
 		opts = append(opts, config.AppSecret(appSecret))
