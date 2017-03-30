@@ -7,12 +7,9 @@ logger:
     - kinesis
     - syslog
 aws:
-  access_key_id: ==AES32==+NPjNiwCtTNvMUg94O/PVGOPc1N6ExBx7Lyz3TGRuIqVfqFoYuRNEl1gkZw=
-  secret_access_key: ==AES32==onXRqpVtlebXW+dN5atvjpZGuyNH8pzkAD7tx7diCj9rnByX9+BxlESV1ehoo7D7BtoDCDf73uLYVqXDQvdOq5JoL9AAFdIr
+  access_key_id: ==AES32==PT1BRVMzMj094kOWYqYJ7IqWA7blVUTfxWdlkq9jJjDAVTTR0ZsXGgBXIbVSWPhlFz1mH7o=
+  secret_access_key: ==AES32==PT1BRVMzMj09fISTFEtXHbTnpMDwiEv8Jn/Gxc6jJFOVgK0J6rncEwXzIs6EhJeYuI6BaLYJ8DmE7xsh4Pfqfy0RkHn8F2oGg08Vg/thMfQG
   region: us-east-1
-  sts_account: 122130270846
-  sts_role: rai
-  sts_role_duration_seconds:  1h
 googlecloud:
   type: ==AES32==PT1BRVMzMj09WYsXB91tmihKV8qdiVaUhn1Vye2UqKHVoiNd+l1RWAYuyk1E
   project_id: ==AES32==PT1BRVMzMj09+RxoghN8HHbVy7v/kLdEwPHOoF4ZcX7E7A2R8uk40bXb5BleLUxK8A==
