@@ -84,6 +84,7 @@ func init() {
 	RootCmd.AddCommand(cmd.EnvCmd)
 	RootCmd.AddCommand(cmd.GendocCmd)
 	RootCmd.AddCommand(cmd.CompletionCmd)
+	RootCmd.AddCommand(cmd.BuildTimeCmd)
 
 	RootCmd.PersistentFlags().StringVar(&configFile, "config", "", "The absolute path to the server configuration. If not set, then the configuration file is searched.")
 	RootCmd.PersistentFlags().StringVarP(&appSecret, "secret", "s", "", "The application secret.")
