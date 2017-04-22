@@ -41,3 +41,4 @@ debug
 .DS_Store
 raid
 nohup.out
+.vscode/ftp-sync.json
