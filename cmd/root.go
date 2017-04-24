@@ -49,6 +49,12 @@ var RootCmd = &cobra.Command{
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 
+		defer func() {
+			if com.IsDir(config.App.TempDir) {
+				os.RemoveAll(config.App.TempDir)
+			}
+		}()
+
 		death := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
 
 		server, err := server.New(serverOptions()...)
