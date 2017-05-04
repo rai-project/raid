@@ -2,6 +2,8 @@ package: github.com/rai-project/raid
 import:
 - package: github.com/Sirupsen/logrus
   version: ~0.11.5
+- package: github.com/Unknwon/com
+  version: ~1.0.0
 - package: github.com/coreos/go-systemd
   version: ~14.0.0
   subpackages:
@@ -13,16 +15,9 @@ import:
 - package: github.com/rai-project/cmd
 - package: github.com/rai-project/config
 - package: github.com/rai-project/logger
+  subpackages:
+  - hooks
 - package: github.com/rai-project/server
 - package: github.com/spf13/cobra
-  version: master
-  subpackages:
-  - doc
 - package: github.com/spf13/viper
 - package: github.com/vrecan/death
-- package: github.com/spf13/pflag
-  version: master
-- package: github.com/docker/distribution
-  version: master
-- package: github.com/docker/docker
-  version: master
