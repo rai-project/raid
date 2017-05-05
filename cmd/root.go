@@ -37,7 +37,7 @@ func serverOptions() []server.Option {
 	return []server.Option{
 		server.Stdout(os.Stdout),
 		server.Stderr(os.Stderr),
-		server.NumWorkers(4),
+		server.NumWorkers(2),
 		server.JobQueueName("rai"),
 	}
 }
