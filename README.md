@@ -45,9 +45,21 @@ Set up STS permissions so that users can upload to an S3 bucket and publish to a
 can be done via the IAM AWS console. The STS currently being used only allows one to attach to a rai
 role which has very limited permissions:
 
-### SQS Queue
+### Simple Queue Service
 
-Create an SQS queue using the AWS console
+Create an SQS queue using the AWS console.
+
+Create a **IAM Policy** that allows reading and writing to the new queue.
+Use the **Policy Generator**. 
+* Selection Amazon SQS for AWS Service. 
+* Choose the following actions:
+    * GetQueueUrl
+    * ReceiveMessage
+    * DeleteMessage
+    * DeleteMessageBatch
+    * SendMessage
+    * SendMessageBatch
+* Create an [ARN](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). The account ID may be found on the AWS account page. For example `arn:aws:sqs:*:account-id:rai2` for the `rai2` sqs queue. 
 
 ### S3 Bucket
 
