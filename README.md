@@ -117,10 +117,148 @@ _These binaries are not publicly readable, you need an AWS_KEY / SECRET to acces
         go build -ldflags="-s -w -X main.AppSecret=${APP_SECRET}"
 
 
-## Usage
+## Configuration
 
+Much of rai/raid is controlled by configuration files. Services that are shared between the client and server must match. In this section we will explain the minimal configurations needed for both the client and server
 
-## SystemD
+**note:** One can create secret keys recognizable by rai/raid using [rai-crypto](https://github.com/rai-project/utils/tree/master/rai-crypto) tool.
+If you want to encrypt a string using “PASS” as your app secret, then you’d want to invoke
+
+    rai-crypto encrypt –s PASS MY_PLAIN_TEXT_STRING
+
+Configurations are specified in YAML format and exist either in $HOME/.rai_config.yml or are embedded within the executable. There are many more configurations that can be set, but if omitted then sensible defaults are used.
+
+### Client Configuration
+
+The client configuration configures the client for usage with a cluster of rai servers.
+
+    app:
+        name: rai # name of the application
+        verbose: false # whether to enable verbosity by default
+        debug: false # whether to enable debug output by default
+    aws:
+        access_key_id: AWS_ACCESS_KEY # the aws access key (encrypted)
+        secret_access_key: AWS_SECRET_KEY # the aws secret key
+        region: us-east-1 # the aws region to use
+        sts_account: STS_ACCOUNT # the sts account number
+        sts_role: rai # the sts role
+        sts_role_duration_seconds: 15m # the maximum time period the sts role can be assumed
+    store:
+        provider: s3 # the store provider
+        base_url: http://s3.amazonaws.com # the base url of the file store
+        acl: public-read # the default permissions for the files uploaded to the file store
+    client:
+        name: rai # name of the client
+        upload_bucket: files.rai-project.com # base url or the store buceket
+        bucket: userdata # location to store the uploaded user data (user input)
+        build_file: rai_build # location to store the result build data (user output)
+    auth:
+        provider: auth0 # the authentication provider
+        domain: raiproject.auth0.com # the domain of the authentication provider
+        client_id: AUTH0_CLIENT_ID # the client id from the authentication. The auth0 client id for example
+        client_secret: AUTH0_CLIENT_SECRET # the client secret from the authentication. The auth0 client secret for example
+    pubsub:
+        endpoints: # list of endpoints for the pub sub service
+            - pubsub.rai-project.com:6379 # the pubsub server location + port
+        password: PUBSUB_PASSWORD # password to the pub/sub service
+
+**Note:** During the travis build process the client configurations are embedded into the client binary. Therefore the $HOME/.rai_config.yml is never read.
+
+### Server Configuration
+
+All servers within a cluster share the same configuration. Here is the configuration currently being used:
+
+    app:
+        name: rai # name of the application
+        verbose: false # whether to enable verbosity by default
+        debug: false # whether to enable debug output by default
+    logger:
+        hooks: # log hooks to enable
+            - syslog # enable the syslog hook
+    aws:
+        access_key_id: AWS_ACCESS_KEY # the aws access key (encrypted)
+        secret_access_key: AWS_SECRET_KEY # the aws secret key
+        region: us-east-1 # the aws region to use
+    store:
+        provider: s3 # the store provider
+        base_url: http://s3.amazonaws.com # the base url of the file store
+        acl: public-read # the default permissions for the files uploaded to the file store
+    broker: # broker/queue configuration section
+        provider: sqs # the queue provider
+        serializer: json # the serialization method to use for messages. Json is the default
+        autoack: true # enable auto acknowledgement of messages
+    store:
+        provider: s3 # the store provider
+        base_url: http://s3.amazonaws.com # the base url of the file store
+        acl: public-read # the default permissions for the files uploaded to the file store
+    client:
+        name: rai # name of the client
+        upload_bucket: files.rai-project.com # base url or the store buceket
+        bucket: userdata # location to store the uploaded user data (user input)
+        build_file: rai_build # location to store the result build data (user output)
+    auth:
+        provider: auth0 # the authentication provider
+        domain: raiproject.auth0.com # the domain of the authentication provider
+        client_id: AUTH0_CLIENT_ID # the client id from the authentication. The auth0 client id for example
+        client_secret: AUTH0_CLIENT_SECRET # the client secret from the authentication. The auth0 client secret for example
+    pubsub:
+        endpoints: # list of endpoints for the pub sub service
+            - pubsub.rai-project.com:6379 # the pubsub server location + port
+        password: PUBSUB_PASSWORD # password to the pub/sub service
+
+Other useful configuration options are docker.time_limit (default 1 hour), docker.memory_limit (default
+16gb)
+
+### Start/Stop Server
+
+With the absence of integration of raid with system service management (such as SystemD, UpStart, ...) one needs to start and stop the raid server manually. \
+Assuming you’ve already compiled the raid executable, you can run the server using the following command:
+
+    ./raid –s ${MY_SECRET}
+
+There are a few options that are available to control settings:
+
+Table 1 : Command line options for raid server
+
+| Description | Option |
+| -- | -- |
+| **Debug Mode** | -d |
+| **Verbose Mode** | -v |
+| **Application Secret** | -s MY_SECRET |
+
+The above command will exit when a user exists the terminal session. Use the nohup command to avoid that
+
+    nohup ./raid –d -v –s ${MY_SECRET} &
+
+#### Creating RAI Accounts
+
+Either build the rai-keygen or download the prebuilt binaries which exist on s3 in /files.rai-project.com/dist/rai-keygen/stable/latest
+
+**Note:** These binaries are not publically readable and you need an AWS_KEY / SECRET to access them.
+
+One can use the [rai-keygen](https://github.com/rai-project/rai-keygen) to generate RAI and email account information to the people enrolled in the class.
+The mailing process uses mailgun.
+A prebuilt rai-keygen includes a builtin configuration file, but if compiling from source, then you need to add the email configuration options
+
+    email:
+        provider: mailgun # the email provider
+        domain: email.webgpu.com # the domain of the
+        source: postmaster@webgpu.com # the source email
+        mailgun_active_api_key: API_KEY
+        mailgun_email_validation_key: VALIDATION_KEY
+
+You will not need the above if you do not need to email the generated keys.
+
+**Note:** Docker builder does not require account generation, since account information is embedded into the webserver.
+
+### Administration Tips
+
+The following tips are based on past experience administering clusters and managing arbitrary user
+execution:
+* If using CUDA, make sure to [enable persistence mode](http://docs.nvidia.com/deploy/driver-persistence/index.html). A systemd service exists within the raid repository
+* A system can become unstable when executing arbitrary code. Consult the logs (ideally a distributed logging) when trying to identify why certain tasks succeed while other fail.
+* Install Cadvistor (github.com/google/cadvisor) to examine the health of the docker container and monitor them.
+* Make sure that you have enough disk space. For example, last year the redis server ran out of disk space 2-3 days before the deadline.
 
 
 
