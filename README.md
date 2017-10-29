@@ -49,9 +49,15 @@ role which has very limited permissions:
 
 Create an SQS queue using the AWS console.
 
+* Navigate to the SQS service page
+* "Create New Queue"
+* Enter the queue name
+* Choose standard for the type.
+* Optionally, configure various queue parameters under "configure queue"
+
 Create a **IAM Policy** that allows reading and writing to the new queue.
 Use the **Policy Generator**. 
-* Selection Amazon SQS for AWS Service. 
+* Select Amazon SQS for AWS Service. 
 * Choose the following actions:
     * GetQueueUrl
     * ReceiveMessage
@@ -59,7 +65,10 @@ Use the **Policy Generator**.
     * DeleteMessageBatch
     * SendMessage
     * SendMessageBatch
-* Create an [ARN](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). The account ID may be found on the AWS account page. For example `arn:aws:sqs:*:account-id:rai2` for the `rai2` sqs queue. 
+* Create an [ARN](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). The account ID may be found on the AWS account page. For example `arn:aws:sqs:*:account-id:rai2` for the `rai2` sqs queue.
+
+The ARN controls which queues the policy applies to.
+For example, `arn:aws:sqs:*:account-id:rai*` will apply to all queues that match `rai*`.
 
 ### S3 Bucket
 
@@ -259,7 +268,6 @@ execution:
 * A system can become unstable when executing arbitrary code. Consult the logs (ideally a distributed logging) when trying to identify why certain tasks succeed while other fail.
 * Install Cadvistor (github.com/google/cadvisor) to examine the health of the docker container and monitor them.
 * Make sure that you have enough disk space. For example, last year the redis server ran out of disk space 2-3 days before the deadline.
-
 
 
 ## Logs
