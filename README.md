@@ -228,6 +228,8 @@ All servers within a cluster share the same configuration. Here is the configura
         endpoints: # list of endpoints for the pub sub service
             - pubsub.rai-project.com:6379 # the pubsub server location + port
         password: PUBSUB_PASSWORD # password to the pub/sub service
+    raid:
+        queue_name: rai_amd64_test # name the server listens on
 ```
 
 Other useful configuration options are `docker.time_limit` (default 1 hour), `docker.memory_limit` (default
