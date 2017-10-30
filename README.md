@@ -5,15 +5,15 @@
 We will use the following terms throughout this document. For the publically available services, this
 document assume reader is familiar with them, their limitations, and semantics:
 
-* Client/rai: the client which users use to interact with the RAI system. This includes the RAI client as well as the docker builder website. The client is usually installed on user’s machine and is used primarily to submit tasks to the system. At any point in time, there can be more thanone client running and submitting jobs to the system. The client should work on any OS and does not require any special hardware to be installed on the system.
-* Job Queue: User’s jobs are submitted onto a queue (using sharding, for example). The queue currently uses Amazon’s SQS queue system. There can be more than one queue, but we currently use only one.
-* Pub/Sub Queue: Output for jobs are published onto a pub/sub server. RAI currently uses Redis for pub/sub. Multiple redis servers can be used, but we currently use only one.
-* Server/raid: All work/execution is run on the server. The server listens to the queue and executes jobs if capable. Depending on the load, more than one server can be run at any point in time. The number of jobs that a server can handle is configurable. Linux is required to use the server with GPU capabilities.
-* Docker: User code execution occurs only within a docker container. Docker is also used to build docker images as well as publishing images to the docker registry. * CUDA Volume: A docker plugin that mounts nvidia driver and cuda libraries within the launched docker container.
-* STS: Amazon’s STS allows one to place a time constraints on the amazon access tokens (also known as roles) being issued. The current constraint is 15 minutes.
-* Store/File Server: The location where user’s data files are stored. The rai system currently uses Amazon’s S3 for storage.
-* Auth: Only users with credentials can submit tasks to rai. Authentication keys can be generated using the rai-keygen tool. In the backend, we use Auth0 as the database. 
-* App secret: all keys, such as credentials to login to the pub/sub server, are encrypted using AES32 based encryption. For prebuilt binaries, the app secret is embedded in the executable. A user can specify the secret from the command line as well.
+* **Client/rai**: the client which users use to interact with the RAI system. This includes the RAI client as well as the docker builder website. The client is usually installed on user’s machine and is used primarily to submit tasks to the system. At any point in time, there can be more thanone client running and submitting jobs to the system. The client should work on any OS and does not require any special hardware to be installed on the system.
+* **Job Queue**: User’s jobs are submitted onto a queue (using sharding, for example). The queue currently uses Amazon’s SQS queue system. There can be more than one queue, but we currently use only one.
+* **Pub/Sub Queue**: Output for jobs are published onto a pub/sub server. RAI currently uses Redis for pub/sub. Multiple redis servers can be used, but we currently use only one.
+* **Server/raid**: All work/execution is run on the server. The server listens to the queue and executes jobs if capable. Depending on the load, more than one server can be run at any point in time. The number of jobs that a server can handle is configurable. Linux is required to use the server with GPU capabilities.
+* **Docker**: User code execution occurs only within a docker container. Docker is also used to build docker images as well as publishing images to the docker registry. * CUDA Volume: A docker plugin that mounts nvidia driver and cuda libraries within the launched docker container.
+* **STS**: Amazon’s STS allows one to place a time constraints on the amazon access tokens (also known as roles) being issued. The current constraint is 15 minutes.
+* **Store/File Server**: The location where user’s data files are stored. The rai system currently uses Amazon’s S3 for storage.
+* **Auth**: Only users with credentials can submit tasks to rai. Authentication keys can be generated using the rai-keygen tool. In the backend, we use Auth0 as the database. 
+* **App secret**: all keys, such as credentials to login to the pub/sub server, are encrypted using AES32 based encryption. For prebuilt binaries, the app secret is embedded in the executable. A user can specify the secret from the command line as well.
 
 ## Components
 
@@ -102,29 +102,38 @@ _These binaries are not publicly readable, you need an AWS_KEY / SECRET to acces
 2. (Optional) Install [glide](https://github.com/Masterminds/glide#install)
 3. Clone the `raid` repository
 
+```sh
         mkdir -p $GOPATH/src/github.com/rai-project
         cd $GOPATH/src/github.com/rai-project
         git clone git@github.com:rai-project/raid.git
+```
 
 4. Install the software dependencies using `glide`.
     1. If you installed `glide` in step 2
 
+```sh
         cd raid
         glide install
+``
 
     2. If you did not
 
+```sh
         cd raid
         go get -u -v ./...
+```
 
 5. Create an executable (optionally, embed the secret. You won't have to use the `-s` flag later)
 
+```sh
         go build
+```
 
     or
 
+```sh
         go build -ldflags="-s -w -X main.AppSecret=${APP_SECRET}"
-
+```
 
 ## Configuration
 
@@ -133,7 +142,9 @@ Much of rai/raid is controlled by configuration files. Services that are shared 
 **note:** One can create secret keys recognizable by rai/raid using [rai-crypto](https://github.com/rai-project/utils/tree/master/rai-crypto) tool.
 If you want to encrypt a string using “PASS” as your app secret, then you’d want to invoke
 
+```sh
     rai-crypto encrypt –s PASS MY_PLAIN_TEXT_STRING
+```
 
 Configurations are specified in YAML format and exist either in $HOME/.rai_config.yml or are embedded within the executable. There are many more configurations that can be set, but if omitted then sensible defaults are used.
 
@@ -141,6 +152,7 @@ Configurations are specified in YAML format and exist either in $HOME/.rai_confi
 
 The client configuration configures the client for usage with a cluster of rai servers.
 
+```yaml
     app:
         name: rai # name of the application
         verbose: false # whether to enable verbosity by default
@@ -170,6 +182,7 @@ The client configuration configures the client for usage with a cluster of rai s
         endpoints: # list of endpoints for the pub sub service
             - pubsub.rai-project.com:6379 # the pubsub server location + port
         password: PUBSUB_PASSWORD # password to the pub/sub service
+```
 
 **Note:** During the travis build process the client configurations are embedded into the client binary. Therefore the $HOME/.rai_config.yml is never read.
 
@@ -177,6 +190,7 @@ The client configuration configures the client for usage with a cluster of rai s
 
 All servers within a cluster share the same configuration. Here is the configuration currently being used:
 
+```yaml
     app:
         name: rai # name of the application
         verbose: false # whether to enable verbosity by default
@@ -214,8 +228,9 @@ All servers within a cluster share the same configuration. Here is the configura
         endpoints: # list of endpoints for the pub sub service
             - pubsub.rai-project.com:6379 # the pubsub server location + port
         password: PUBSUB_PASSWORD # password to the pub/sub service
+```
 
-Other useful configuration options are docker.time_limit (default 1 hour), docker.memory_limit (default
+Other useful configuration options are `docker.time_limit` (default 1 hour), `docker.memory_limit` (default
 16gb)
 
 ### Start/Stop Server
@@ -223,7 +238,9 @@ Other useful configuration options are docker.time_limit (default 1 hour), docke
 With the absence of integration of raid with system service management (such as SystemD, UpStart, ...) one needs to start and stop the raid server manually. \
 Assuming you’ve already compiled the raid executable, you can run the server using the following command:
 
+```sh
     ./raid –s ${MY_SECRET}
+```
 
 There are a few options that are available to control settings:
 
@@ -237,7 +254,9 @@ Table 1 : Command line options for raid server
 
 The above command will exit when a user exists the terminal session. Use the nohup command to avoid that
 
+```sh
     nohup ./raid –d -v –s ${MY_SECRET} &
+```
 
 #### Creating RAI Accounts
 
