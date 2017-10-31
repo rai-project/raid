@@ -114,7 +114,7 @@ _These binaries are not publicly readable, you need an AWS_KEY / SECRET to acces
 ```sh
         cd raid
         glide install
-``
+```
 
     2. If you did not
 
