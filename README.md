@@ -109,14 +109,16 @@ _These binaries are not publicly readable, you need an AWS_KEY / SECRET to acces
 ```
 
 4. Install the software dependencies using `glide`.
-    1. If you installed `glide` in step 2
+a. If you installed `glide` in step 2
 
 ```sh
         cd raid
         glide install
-``
+```
 
-    2. If you did not
+
+b. If you did not
+
 
 ```sh
         cd raid
@@ -129,7 +131,8 @@ _These binaries are not publicly readable, you need an AWS_KEY / SECRET to acces
         go build
 ```
 
-    or
+or
+
 
 ```sh
         go build -ldflags="-s -w -X main.AppSecret=${APP_SECRET}"
@@ -210,10 +213,6 @@ All servers within a cluster share the same configuration. Here is the configura
         provider: sqs # the queue provider
         serializer: json # the serialization method to use for messages. Json is the default
         autoack: true # enable auto acknowledgement of messages
-    store:
-        provider: s3 # the store provider
-        base_url: http://s3.amazonaws.com # the base url of the file store
-        acl: public-read # the default permissions for the files uploaded to the file store
     client:
         name: rai # name of the client
         upload_bucket: files.rai-project.com # base url or the store buceket
