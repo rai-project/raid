@@ -213,10 +213,6 @@ All servers within a cluster share the same configuration. Here is the configura
         provider: sqs # the queue provider
         serializer: json # the serialization method to use for messages. Json is the default
         autoack: true # enable auto acknowledgement of messages
-    store:
-        provider: s3 # the store provider
-        base_url: http://s3.amazonaws.com # the base url of the file store
-        acl: public-read # the default permissions for the files uploaded to the file store
     client:
         name: rai # name of the client
         upload_bucket: files.rai-project.com # base url or the store buceket
