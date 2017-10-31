@@ -109,14 +109,16 @@ _These binaries are not publicly readable, you need an AWS_KEY / SECRET to acces
 ```
 
 4. Install the software dependencies using `glide`.
-    1. If you installed `glide` in step 2
+a. If you installed `glide` in step 2
 
 ```sh
         cd raid
         glide install
 ```
 
-    2. If you did not
+
+b. If you did not
+
 
 ```sh
         cd raid
@@ -129,7 +131,8 @@ _These binaries are not publicly readable, you need an AWS_KEY / SECRET to acces
         go build
 ```
 
-    or
+or
+
 
 ```sh
         go build -ldflags="-s -w -X main.AppSecret=${APP_SECRET}"
