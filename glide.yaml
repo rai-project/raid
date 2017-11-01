@@ -1,5 +1,9 @@
 package: github.com/rai-project/raid
 import:
+- package: golang.org/x/sys
+  version: master
+- package: github.com/opencontainers/runc
+  version: master
 - package: github.com/sirupsen/logrus
   version: ^1.0.0
 - package: github.com/Unknwon/com
