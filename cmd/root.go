@@ -18,12 +18,13 @@ import (
 )
 
 var (
-	isColor    bool
-	isVerbose  bool
-	isDebug    bool
-	inShutdown int32
-	appSecret  string
-	configFile string
+	isColor            bool
+	isVerbose          bool
+	isDebug            bool
+	inShutdown         int32
+	appSecret          string
+	configFile         string
+	clientJobQueueName string
 )
 
 type prof struct{}
@@ -31,15 +32,6 @@ type prof struct{}
 func (c prof) Close() error {
 	pprof.StopCPUProfile()
 	return nil
-}
-
-func serverOptions() []server.Option {
-	return []server.Option{
-		server.Stdout(os.Stdout),
-		server.Stderr(os.Stderr),
-		server.NumWorkers(2),
-		server.JobQueueName("rai"),
-	}
 }
 
 // RootCmd represents the base command when called without any subcommands
@@ -57,7 +49,17 @@ var RootCmd = &cobra.Command{
 
 		death := death.NewDeath(syscall.SIGINT, syscall.SIGTERM)
 
-		server, err := server.New(serverOptions()...)
+		options := []server.Option{
+			server.Stdout(os.Stdout),
+			server.Stderr(os.Stderr),
+			server.NumWorkers(2),
+		}
+
+		if clientJobQueueName != "" {
+			options = append(options, server.JobQueueName(clientJobQueueName))
+		}
+
+		server, err := server.New(options...)
 		if err != nil {
 			return err
 		}
@@ -94,6 +96,7 @@ func init() {
 
 	RootCmd.PersistentFlags().StringVar(&configFile, "config", "", "The absolute path to the server configuration. If not set, then the configuration file is searched.")
 	RootCmd.PersistentFlags().StringVarP(&appSecret, "secret", "s", "", "The application secret.")
+	RootCmd.PersistentFlags().StringVarP(&clientJobQueueName, "queue", "q", "", "The job queue to listen on.")
 	RootCmd.PersistentFlags().BoolVarP(&isColor, "color", "c", true, "Toggle color output.")
 	RootCmd.PersistentFlags().BoolVarP(&isVerbose, "verbose", "v", false, "Toggle verbose mode.")
 	RootCmd.PersistentFlags().BoolVarP(&isDebug, "debug", "d", false, "Toggle debug mode.")
