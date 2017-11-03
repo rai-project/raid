@@ -74,6 +74,53 @@ For example, `arn:aws:sqs:*:account-id:rai*` will apply to all queues that match
 
 Create an S3 bucket using the AWS console
 
+### MongoDB
+
+Create a mongodb to store submissions from the client.
+
+* Create a security group that allows ssh (port 22) and mongodb (port 27017)
+* Create an AWS EC2 instance to run the database and add it to that security group
+
+Install docker
+
+    curl -fsSL get.docker.com -o get-docker.sh | sudo sh
+    sudo usermod -aG docker $USER
+
+Log out and log back in. 
+Start mongo 3.0
+
+    docker run -p 27017:27017 --restart always -d --name rai-mongo mongo:3.0 --auth
+
+Takes a while to preallocate some files. Then connect to the database as admin
+
+    docker exec -it rai-mongo mongo --authenticationDatabase admin admin
+
+Add a rai-admin user that can administer any database
+
+    db.createUser({ user: 'rai-root', pwd: 'some-password', roles: [ { role: "root", db: "admin" } ] });
+
+Exit and connect to the admin database as that user
+
+    docker exec -it rai-mongo mongo --authenticationDatabase admin -u rai-root -p some-password admin
+
+Switch to the rankings database
+
+    use rankings
+
+Create a collection for the submissions:
+
+    db.createCollection("submissions")
+
+Add a user for the rai-client
+
+    db.createUser({ user: 'rai-client', pwd: 'some-password', roles: [ { role: "readWrite", db: "rankings" } ] });
+
+To nuke the database and start from scratch if you goof up:
+
+    docker rm -f `docker ps -a -q` && docker volume prune
+ 
+
+
 ### Redis Server
 
 Install a redis server. A docker container can also be used.
