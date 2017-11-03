@@ -103,18 +103,18 @@ Exit and connect to the admin database as that user
 
     docker exec -it rai-mongo mongo --authenticationDatabase admin -u rai-root -p some-password admin
 
-Switch to the rankings database
+Switch to the rai database
 This doesn't actually create a database until you put something into the database
 
-    use rankings
+    use rai
 
 Create a collection for the submissions.
 
-    db.createCollection("submissions")
+    db.createCollection("rankings")
 
 Now that the rankings database exists, add a user for the rai-client
 
-    db.createUser({ user: 'rai-client', pwd: 'some-password', roles: [ { role: "readWrite", db: "rankings" } ] });
+    db.createUser({ user: 'rai-client', pwd: 'some-password', roles: [ { role: "readWrite", db: "rai" } ] });
 
 To nuke the database and start from scratch if you goof up:
 
