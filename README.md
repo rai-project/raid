@@ -288,6 +288,28 @@ execution:
 * Make sure that you have enough disk space. For example, last year the redis server ran out of disk space 2-3 days before the deadline.
 
 
+#### AWS Admin Notes
+
+
+##### Reboot all AWS Instances
+
+```
+instances=$(aws ec2 describe-instances --filters "Name=tag:name,Values=ece408.project" "Name=instance-state-code,Values=16" | jq -j '[.Reservations[].Instances[].InstanceId] | @sh')
+echo ${instances}
+for instance in ${instances}
+do
+  echo ${instance}
+  #aws ec2 reboot-instances --dry-run --instance-ids ${instance}
+done
+```
+
+or
+
+```
+instances=$(aws ec2 describe-instances --filters "Name=tag:name,Values=ece408.project" "Name=instance-state-code,Values=16" | jq -j '[.Reservations[].Instances[].InstanceId] | join(" --instance-ids ")')
+aws ec2 reboot-instances --no-dry-run --instance-ids ${instances}
+```
+
 ## Logs
 
 If `journald` is enabled, then you can view the server logs using `journalctl -f -u raid.service`
