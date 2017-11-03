@@ -91,7 +91,7 @@ Start mongo 3.0
 
     docker run -p 27017:27017 --restart always -d --name rai-mongo mongo:3.0 --auth
 
-Takes a while to preallocate some files. Then connect to the database as admin
+Takes a while to preallocate some files. Then connect to the admin database as admin
 
     docker exec -it rai-mongo mongo --authenticationDatabase admin admin
 
@@ -104,14 +104,15 @@ Exit and connect to the admin database as that user
     docker exec -it rai-mongo mongo --authenticationDatabase admin -u rai-root -p some-password admin
 
 Switch to the rankings database
+This doesn't actually create a database until you put something into the database
 
     use rankings
 
-Create a collection for the submissions:
+Create a collection for the submissions.
 
     db.createCollection("submissions")
 
-Add a user for the rai-client
+Now that the rankings database exists, add a user for the rai-client
 
     db.createUser({ user: 'rai-client', pwd: 'some-password', roles: [ { role: "readWrite", db: "rankings" } ] });
 
