@@ -305,6 +305,65 @@ The above command will exit when a user exists the terminal session. Use the noh
     nohup ./raid –d -v –s ${MY_SECRET} &
 ```
 
+#### Setting up NVIDIA Persistence Mode
+
+If using CUDA, make sure to [enable persistence mode](http://docs.nvidia.com/deploy/driver-persistence/index.html).
+
+
+Copy the the systemd service in `build/systemd/nvidia-persistenced.service` and modify the line
+
+```
+ExecStart=/usr/bin/nvidia-persistenced --user ubuntu
+```
+
+to launch using the user you want (here it's launching under the `ubuntu` user).
+Once modified, copy the file to `/etc/systemd/system/` and start the systemd service
+
+```sh
+sudo mv nvidia-persistenced.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl start nvidia-persistenced.service
+```
+
+Make sure that the `nvidia-persistenced.service` service has been started. 
+The command
+
+```sh
+sudo systemctl status nvidia-persistenced.service
+```
+
+should give an output similar to
+
+```sh
+● nvidia-persistenced.service - NVIDIA Persistence Daemon
+   Loaded: loaded (/etc/systemd/system/nvidia-persistenced.service; disabled; vendor preset: enabled)
+   Active: active (running) since Fri 2017-11-03 18:33:42 CDT; 5min ago
+  Process: 71100 ExecStopPost=/bin/rm -rf /var/run/nvidia-persistenced (code=exited, status=0/SUCCESS)
+  Process: 71103 ExecStart=/usr/bin/nvidia-persistenced --user abduld (code=exited, status=0/SUCCESS)
+ Main PID: 71107 (nvidia-persiste)
+    Tasks: 1
+   Memory: 492.0K
+      CPU: 3ms
+   CGroup: /system.slice/nvidia-persistenced.service
+           └─71107 /usr/bin/nvidia-persistenced --user abduld
+
+Nov 03 18:33:42 whatever systemd[1]: Starting NVIDIA Persistence Daemon...
+Nov 03 18:33:42 whatever nvidia-persistenced[71107]: Started (71107)
+Nov 03 18:33:42 whatever systemd[1]: Started NVIDIA Persistence Daemon.
+```
+
+Finally, check that the driver is run in persistence mode
+
+```sh
+$ nvidia-smi -a | grep Pe
+    Persistence Mode                : Enabled
+        Pending                     : N/A
+        Pending                     : N/A
+    Performance State               : P5
+        Pending                     : N/A
+        Pending                     : N/A
+```
+
 #### Creating RAI Accounts
 
 Either build the rai-keygen or download the prebuilt binaries which exist on s3 in /files.rai-project.com/dist/rai-keygen/stable/latest
