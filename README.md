@@ -89,7 +89,7 @@ Install docker
 Log out and log back in. 
 Start mongo 3.0
 
-    docker run -p 27017:27017 --restart always -d --name rai-mongo mongo:3.0 --auth
+    docker run -p 27017:27017 --restart always -d --name rai-mongo -v /data/db:/data/db mongo:3.0 --auth
 
 Takes a while to preallocate some files. YOu can monitor with `docker logs -f rai-mongo`. Then connect to the admin database as admin
 
