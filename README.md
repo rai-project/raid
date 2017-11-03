@@ -146,44 +146,110 @@ Prebuilt raid binaries exist on s3 in /files.rai-project.com/dist/raid/stable/la
 
 ## RAID Server Installation from Source
 
-1. Install golang. Either through [Go Version Manager](https://github.com/moovweb/gvm)(recommended) or from the instructions on the [golang site](https://golang.org/). We recommend the Go Version Manager.
-2. (Optional) Install [glide](https://github.com/Masterminds/glide#install)
-3. Clone the `raid` repository
+RAI is developed using [golang](https://golang.org/) which needs to be installed for code to be compiled from source.
+You can install Golang either through [Go Version Manager](https://github.com/moovweb/gvm)(recommended) or from the instructions on the [golang site](https://golang.org/). We recommend the Go Version Manager.
 
-```sh
-        mkdir -p $GOPATH/src/github.com/rai-project
-        cd $GOPATH/src/github.com/rai-project
-        git clone git@github.com:rai-project/raid.git
+
+The following are instruction on how to install Go 1.8 through Go version manager.
+Go version 1.8+ is required to compile RAI.
+
+Download the [GVM](https://github.com/moovweb/gvm) using
+
+```
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 ```
 
-4. Install the software dependencies using `glide`.
-a. If you installed `glide` in step 2
+Add the following line to your `.bashrc`(or `.zshrc` if using zsh) to set up the GVM environment.
+This is sometimes done for you by default.
 
-```sh
-        cd raid
-        glide install
+```
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 ```
 
+You can then install the Go 1.8 binary and set it as the default
 
-b. If you did not
-
-
-```sh
-        cd raid
-        go get -u -v ./...
+```
+gvm install go1.8 -B
+gvm use go1.8 --default
 ```
 
-5. Create an executable (optionally, embed the secret. You won't have to use the `-s` flag later)
+`gvm` will setup both your `$GOPATH` and `$GOROOT` and you can validate that the installation completed by invoking
 
 ```sh
-        go build
+$ go env
+GOARCH="amd64"
+GOBIN=""
+GOEXE=""
+GOHOSTARCH="amd64"
+GOHOSTOS="linux"
+GOOS="linux"
+GOPATH="/home/abduld/.gvm/pkgsets/go1.8/global"
+GORACE=""
+GOROOT="/home/abduld/.gvm/gos/go1.8"
+GOTOOLDIR="/home/abduld/.gvm/gos/go1.8/pkg/tool/linux_amd64"
+GCCGO="gccgo"
+CC="gcc"
+GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build917072201=/tmp/go-build -gno-record-gcc-switches"
+CXX="g++"
+CGO_ENABLED="1"
+PKG_CONFIG="pkg-config"
+CGO_CFLAGS="-g -O2"
+CGO_CPPFLAGS=""
+CGO_CXXFLAGS="-g -O2"
+CGO_FFLAGS="-g -O2"
+CGO_LDFLAGS="-g -O2"
+```
+
+### Installing using `rai-srcmanager`
+
+
+First, install the `rai-srcmanager` by
+
+```sh
+go get -u -v github.com/rai-project/rai-srcmanager
+```
+
+Download the required public repositories by
+
+```sh
+rai-srcmanager update --public
+```
+
+Now all the relevant repositories should now be in `$GOPATH/src/github.com/rai-project`.
+
+### Installing using glide
+
+1. Install [glide](https://github.com/Masterminds/glide#install) by running `go get github.com/Masterminds/glide`
+2. Clone the `raid` repository
+
+```sh
+go get -d github.com:rai-project/raid.git
+```
+
+3. Install the software dependencies using `glide`.
+
+```sh
+cd $GOPATH/src/github.com/rai-project/raid
+glide install
+```
+
+4. Create an executable (optionally, embed the secret. You won't have to use the `-s` flag later)
+
+```sh
+go build
 ```
 
 or
 
 
 ```sh
-        go build -ldflags="-s -w -X main.AppSecret=${APP_SECRET}"
+go build -ldflags="-s -w -X main.AppSecret=${APP_SECRET}"
+```
+
+you can then validate if `raid` has been compiled correctly by invoking
+
+```
+./raid help
 ```
 
 ## Configuration
@@ -374,12 +440,14 @@ One can use the [rai-keygen](https://github.com/rai-project/rai-keygen) to gener
 The mailing process uses mailgun.
 A prebuilt rai-keygen includes a builtin configuration file, but if compiling from source, then you need to add the email configuration options
 
+```yaml
     email:
         provider: mailgun # the email provider
         domain: email.webgpu.com # the domain of the
         source: postmaster@webgpu.com # the source email
         mailgun_active_api_key: API_KEY
         mailgun_email_validation_key: VALIDATION_KEY
+```
 
 You will not need the above if you do not need to email the generated keys.
 
