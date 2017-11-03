@@ -84,7 +84,7 @@ Follow the instructions at [rai-project/rai-docker-volume](https://github.com/ra
 
 Prebuilt binaries exist on S3 at /files.rai-project.com/dist/rai-docker-volume/stable/latest.
 
-_These binaries are not publicly readable, you need an AWS_KEY / SECRET to access them._
+> _These binaries are not publicly readable, you need an AWS_KEY / SECRET to access them._
 
 ## RAI Client Installation
 
@@ -94,7 +94,7 @@ See [rai-project/rai](https://github.com/rai-project/rai#download-binaries)
 
 Prebuilt raid binaries exist on s3 in /files.rai-project.com/dist/raid/stable/latest
 
-_These binaries are not publicly readable, you need an AWS_KEY / SECRET to access them._
+> _These binaries are not publicly readable, you need an AWS_KEY / SECRET to access them._
 
 ## RAID Server Installation from Source
 
@@ -142,8 +142,8 @@ or
 
 Much of rai/raid is controlled by configuration files. Services that are shared between the client and server must match. In this section we will explain the minimal configurations needed for both the client and server
 
-**note:** One can create secret keys recognizable by rai/raid using [rai-crypto](https://github.com/rai-project/utils/tree/master/rai-crypto) tool.
-If you want to encrypt a string using “PASS” as your app secret, then you’d want to invoke
+> **Note:** One can create secret keys recognizable by rai/raid using [rai-crypto](https://github.com/rai-project/utils/tree/master/rai-crypto) tool.
+> If you want to encrypt a string using “PASS” as your app secret, then you’d want to invoke
 
 ```sh
     rai-crypto encrypt –s PASS MY_PLAIN_TEXT_STRING
@@ -187,7 +187,7 @@ The client configuration configures the client for usage with a cluster of rai s
         password: PUBSUB_PASSWORD # password to the pub/sub service
 ```
 
-**Note:** During the travis build process the client configurations are embedded into the client binary. Therefore the $HOME/.rai_config.yml is never read.
+> **Note:** During the travis build process the client configurations are embedded into the client binary. Therefore the $HOME/.rai_config.yml is never read.
 
 ### Server Configuration
 
@@ -261,7 +261,7 @@ The above command will exit when a user exists the terminal session. Use the noh
 
 Either build the rai-keygen or download the prebuilt binaries which exist on s3 in /files.rai-project.com/dist/rai-keygen/stable/latest
 
-**Note:** These binaries are not publically readable and you need an AWS_KEY / SECRET to access them.
+> **Note:** These binaries are not publically readable and you need an AWS_KEY / SECRET to access them.
 
 One can use the [rai-keygen](https://github.com/rai-project/rai-keygen) to generate RAI and email account information to the people enrolled in the class.
 The mailing process uses mailgun.
@@ -276,7 +276,7 @@ A prebuilt rai-keygen includes a builtin configuration file, but if compiling fr
 
 You will not need the above if you do not need to email the generated keys.
 
-**Note:** Docker builder does not require account generation, since account information is embedded into the webserver.
+> **Note:** Docker builder does not require account generation, since account information is embedded into the webserver.
 
 ### Administration Tips
 
