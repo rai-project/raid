@@ -234,7 +234,9 @@ cd $GOPATH/src/github.com/rai-project/raid
 glide install
 ```
 
-4.  Create an executable (optionally, embed the secret. You won't have to use the `-s` flag later)
+### Build Binary
+
+Create an executable (optionally, embed the secret. You won't have to use the `-s` flag later)
 
 ```sh
 go build
