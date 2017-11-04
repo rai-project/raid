@@ -1,43 +1,53 @@
 # raid [![Build Status](https://travis-ci.org/rai-project/raid.svg?branch=master)](https://travis-ci.org/rai-project/raid)
 
+## Features
+
+-   Submissions of projects to a remote server
+-   Work on CUDA code without the need of hardware or software installed on local System
+-   Use CUDA hardware architectures which are not available on commodity systems
+
 ## Terminology
 
 We will use the following terms throughout this document. For the publically available services, this
 document assume reader is familiar with them, their limitations, and semantics:
 
-* **Client/rai**: the client which users use to interact with the RAI system. This includes the RAI client as well as the docker builder website. The client is usually installed on user’s machine and is used primarily to submit tasks to the system. At any point in time, there can be more thanone client running and submitting jobs to the system. The client should work on any OS and does not require any special hardware to be installed on the system.
-* **Job Queue**: User’s jobs are submitted onto a queue (using sharding, for example). The queue currently uses Amazon’s SQS queue system. There can be more than one queue, but we currently use only one.
-* **Pub/Sub Queue**: Output for jobs are published onto a pub/sub server. RAI currently uses Redis for pub/sub. Multiple redis servers can be used, but we currently use only one.
-* **Server/raid**: All work/execution is run on the server. The server listens to the queue and executes jobs if capable. Depending on the load, more than one server can be run at any point in time. The number of jobs that a server can handle is configurable. Linux is required to use the server with GPU capabilities.
-* **Docker**: User code execution occurs only within a docker container. Docker is also used to build docker images as well as publishing images to the docker registry. * CUDA Volume: A docker plugin that mounts nvidia driver and cuda libraries within the launched docker container.
-* **STS**: Amazon’s STS allows one to place a time constraints on the amazon access tokens (also known as roles) being issued. The current constraint is 15 minutes.
-* **Store/File Server**: The location where user’s data files are stored. The rai system currently uses Amazon’s S3 for storage.
-* **Auth**: Only users with credentials can submit tasks to rai. Authentication keys can be generated using the rai-keygen tool. In the backend, we use Auth0 as the database. 
-* **App secret**: all keys, such as credentials to login to the pub/sub server, are encrypted using AES32 based encryption. For prebuilt binaries, the app secret is embedded in the executable. A user can specify the secret from the command line as well.
+-   **Client/rai**: the client which users use to interact with the RAI system. This includes the RAI client as well as the docker builder website. The client is usually installed on user’s machine and is used primarily to submit tasks to the system. At any point in time, there can be more thanone client running and submitting jobs to the system. The client should work on any OS and does not require any special hardware to be installed on the system.
+-   **Job Queue**: User’s jobs are submitted onto a queue (using sharding, for example). The queue currently uses Amazon’s SQS queue system. There can be more than one queue, but we currently use only one.
+-   **Pub/Sub Queue**: Output for jobs are published onto a pub/sub server. RAI currently uses Redis for pub/sub. Multiple Redis servers can be used, but we currently use only one.
+-   **Server/raid**: All work/execution is run on the server. The server listens to the queue and executes jobs if capable. Depending on the load, more than one server can be run at any point in time. The number of jobs that a server can handle is configurable. Linux is required to use the server with GPU capabilities.
+-   **Docker**: User code execution occurs only within a docker container. Docker is also used to build docker images as well as publishing images to the docker registry. \* CUDA Volume: A docker plugin that mounts nvidia driver and cuda libraries within the launched docker container.
+-   **STS**: Amazon’s STS allows one to place a time constraints on the amazon access tokens (also known as roles) being issued. The current constraint is 15 minutes.
+-   **Store/File Server**: The location where user’s data files are stored. The rai system currently uses Amazon’s S3 for storage.
+-   **Auth**: Only users with credentials can submit tasks to rai. Authentication keys can be generated using the rai-keygen tool. In the backend, we use Auth0 as the database. 
+-   **App secret**: all keys, such as credentials to login to the pub/sub server, are encrypted using AES32 based encryption. For prebuilt binaries, the app secret is embedded in the executable. A user can specify the secret from the command line as well.
 
 ## Components
 
+![components](doc/assets/figures/components_figure.png)
+
 ## Execution Flow
 
-1. A client submits a task to RAI
-    1. Credentials are validated
-    2. The directory is archived and uploaded to the file server
-    3. The task is submitted to the queue
-    4. The user subscribes to the pub/sub server and prints all messages being received
-2. A server accepts a task from the queue
-    1. Check if the task is valid
-    2. Either build or downloads the docker images required to run the task
-    3. Download the user directory
-    4. Start a publish channel to the pub/sub server
-    5. Start a docker container and run the user commands (if gpu is requested, then the cuda
-    volume is mounted)
-    6. All stdout/stderr messages from the docker container are forwarded to the publish
-    channel
-    7. Wait for either tasks to complete or a timeout
-    h. The output directory is uploaded to the file server and a link is published
-    8. Close the publish channel / docker container
+![flow](doc/assets/figures/flow_figure.png)
 
-## Prerequisites
+1.  A client submits a task to RAI
+    1.  Credentials are validated
+    2.  The directory is archived and uploaded to the file server
+    3.  The task is submitted to the queue
+    4.  The user subscribes to the pub/sub server and prints all messages being received
+2.  A server accepts a task from the queue
+    1.  Check if the task is valid
+    2.  Either build or downloads the docker images required to run the task
+    3.  Download the user directory
+    4.  Start a publish channel to the pub/sub server
+    5.  Start a docker container and run the user commands (if gpu is requested, then the cuda
+        volume is mounted)
+    6.  All `stdout`/`stderr` messages from the docker container are forwarded to the publish
+        channel
+    7.  Wait for either tasks to complete or a timeout
+        h. The output directory is uploaded to the file server and a link is published
+    8.  Close the publish channel / docker container
+
+## Installation and Service Prerequisites
 
 ### STS Permissions
 
@@ -49,23 +59,24 @@ role which has very limited permissions:
 
 Create an SQS queue using the AWS console.
 
-* Navigate to the SQS service page
-* "Create New Queue"
-* Enter the queue name
-* Choose standard for the type.
-* Optionally, configure various queue parameters under "configure queue"
+-   Navigate to the SQS service page
+-   "Create New Queue"
+-   Enter the queue name
+-   Choose standard for the type.
+-   Optionally, configure various queue parameters under "configure queue"
 
 Create a **IAM Policy** that allows reading and writing to the new queue.
 Use the **Policy Generator**. 
-* Select Amazon SQS for AWS Service. 
-* Choose the following actions:
-    * GetQueueUrl
-    * ReceiveMessage
-    * DeleteMessage
-    * DeleteMessageBatch
-    * SendMessage
-    * SendMessageBatch
-* Create an [ARN](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). The account ID may be found on the AWS account page. For example `arn:aws:sqs:*:account-id:rai2` for the `rai2` sqs queue.
+
+-   Select Amazon SQS for AWS Service. 
+-   Choose the following actions:
+    -   GetQueueUrl
+    -   ReceiveMessage
+    -   DeleteMessage
+    -   DeleteMessageBatch
+    -   SendMessage
+    -   SendMessageBatch
+-   Create an [ARN](http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). The account ID may be found on the AWS account page. For example `arn:aws:sqs:*:account-id:rai2` for the `rai2` sqs queue.
 
 The ARN controls which queues the policy applies to.
 For example, `arn:aws:sqs:*:account-id:rai*` will apply to all queues that match `rai*`.
@@ -78,8 +89,8 @@ Create an S3 bucket using the AWS console
 
 Create a mongodb to store submissions from the client.
 
-* Create a security group that allows ssh (port 22) and mongodb (port 27017)
-* Create an AWS EC2 instance to run the database and add it to that security group
+-   Create a security group that allows ssh (port 22) and mongodb (port 27017)
+-   Create an AWS EC2 instance to run the database and add it to that security group
 
 Install docker
 
@@ -119,8 +130,6 @@ Now that the rankings database exists, add a user for the rai-client
 To nuke the database and start from scratch if you goof up:
 
     docker rm -f `docker ps -a -q` && docker volume prune
- 
-
 
 ### Redis Server
 
@@ -149,29 +158,22 @@ Prebuilt raid binaries exist on s3 in /files.rai-project.com/dist/raid/stable/la
 RAI is developed using [golang](https://golang.org/) which needs to be installed for code to be compiled from source.
 You can install Golang either through [Go Version Manager](https://github.com/moovweb/gvm)(recommended) or from the instructions on the [golang site](https://golang.org/). We recommend the Go Version Manager.
 
-
 The following are instruction on how to install Go 1.8 through Go version manager.
 Go version 1.8+ is required to compile RAI.
 
 Download the [GVM](https://github.com/moovweb/gvm) using
 
-```
-bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-```
+    bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 
 Add the following line to your `.bashrc`(or `.zshrc` if using zsh) to set up the GVM environment.
 This is sometimes done for you by default.
 
-```
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-```
+    [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 You can then install the Go 1.8 binary and set it as the default
 
-```
-gvm install go1.8 -B
-gvm use go1.8 --default
-```
+    gvm install go1.8 -B
+    gvm use go1.8 --default
 
 `gvm` will setup both your `$GOPATH` and `$GOROOT` and you can validate that the installation completed by invoking
 
@@ -202,7 +204,6 @@ CGO_LDFLAGS="-g -O2"
 
 ### Installing using `rai-srcmanager`
 
-
 First, install the `rai-srcmanager` by
 
 ```sh
@@ -219,21 +220,21 @@ Now all the relevant repositories should now be in `$GOPATH/src/github.com/rai-p
 
 ### Installing using glide
 
-1. Install [glide](https://github.com/Masterminds/glide#install) by running `go get github.com/Masterminds/glide`
-2. Clone the `raid` repository
+1.  Install [glide](https://github.com/Masterminds/glide#install) by running `go get github.com/Masterminds/glide`
+2.  Clone the `raid` repository
 
 ```sh
 go get -d github.com:rai-project/raid.git
 ```
 
-3. Install the software dependencies using `glide`.
+3.  Install the software dependencies using `glide`.
 
 ```sh
 cd $GOPATH/src/github.com/rai-project/raid
 glide install
 ```
 
-4. Create an executable (optionally, embed the secret. You won't have to use the `-s` flag later)
+4.  Create an executable (optionally, embed the secret. You won't have to use the `-s` flag later)
 
 ```sh
 go build
@@ -241,16 +242,13 @@ go build
 
 or
 
-
 ```sh
 go build -ldflags="-s -w -X main.AppSecret=${APP_SECRET}"
 ```
 
 you can then validate if `raid` has been compiled correctly by invoking
 
-```
-./raid help
-```
+    ./raid help
 
 ## Configuration
 
@@ -348,7 +346,7 @@ Other useful configuration options are `docker.time_limit` (default 1 hour), `do
 
 ### Start/Stop Server
 
-With the absence of integration of raid with system service management (such as SystemD, UpStart, ...) one needs to start and stop the raid server manually. \
+With the absence of integration of raid with system service management (such as SystemD, UpStart, ...) one needs to start and stop the raid server manually. \\
 Assuming you’ve already compiled the raid executable, you can run the server using the following command:
 
 ```sh
@@ -359,10 +357,10 @@ There are a few options that are available to control settings:
 
 Table 1 : Command line options for raid server
 
-| Description | Option |
-| -- | -- |
-| **Debug Mode** | -d |
-| **Verbose Mode** | -v |
+| Description            | Option       |
+| ---------------------- | ------------ |
+| **Debug Mode**         | -d           |
+| **Verbose Mode**       | -v           |
 | **Application Secret** | -s MY_SECRET |
 
 The above command will exit when a user exists the terminal session. Use the nohup command to avoid that
@@ -375,12 +373,9 @@ The above command will exit when a user exists the terminal session. Use the noh
 
 If using CUDA, make sure to [enable persistence mode](http://docs.nvidia.com/deploy/driver-persistence/index.html).
 
-
 Copy the the systemd service in `build/systemd/nvidia-persistenced.service` and modify the line
 
-```
-ExecStart=/usr/bin/nvidia-persistenced --user ubuntu
-```
+    ExecStart=/usr/bin/nvidia-persistenced --user ubuntu
 
 to launch using the user you want (here it's launching under the `ubuntu` user).
 Once modified, copy the file to `/etc/systemd/system/` and start the systemd service
@@ -457,38 +452,52 @@ You will not need the above if you do not need to email the generated keys.
 
 The following tips are based on past experience administering clusters and managing arbitrary user
 execution:
-* If using CUDA, make sure to [enable persistence mode](http://docs.nvidia.com/deploy/driver-persistence/index.html). A systemd service exists within the raid repository
-* A system can become unstable when executing arbitrary code. Consult the logs (ideally a distributed logging) when trying to identify why certain tasks succeed while other fail.
-* Install Cadvistor (github.com/google/cadvisor) to examine the health of the docker container and monitor them.
-* Make sure that you have enough disk space. For example, last year the redis server ran out of disk space 2-3 days before the deadline.
 
+-   If using CUDA, make sure to [enable persistence mode](http://docs.nvidia.com/deploy/driver-persistence/index.html). A systemd service exists within the raid repository
+-   A system can become unstable when executing arbitrary code. Consult the logs (ideally a distributed logging) when trying to identify why certain tasks succeed while other fail.
+-   Install Cadvistor (github.com/google/cadvisor) to examine the health of the docker container and monitor them.
+-   Make sure that you have enough disk space. For example, last year the redis server ran out of disk space 2-3 days before the deadline.
 
 #### AWS Admin Notes
 
-
 ##### Reboot all AWS Instances
 
-```
-instances=$(aws ec2 describe-instances --filters "Name=tag:name,Values=ece408.project" "Name=instance-state-code,Values=16" | jq -j '[.Reservations[].Instances[].InstanceId] | @sh')
-echo ${instances}
-for instance in ${instances}
-do
-  echo ${instance}
-  #aws ec2 reboot-instances --dry-run --instance-ids ${instance}
-done
-```
+    instances=$(aws ec2 describe-instances --filters "Name=tag:name,Values=ece408.project" "Name=instance-state-code,Values=16" | jq -j '[.Reservations[].Instances[].InstanceId] | @sh')
+    echo ${instances}
+    for instance in ${instances}
+    do
+      echo ${instance}
+      #aws ec2 reboot-instances --dry-run --instance-ids ${instance}
+    done
 
 or
 
-```
-instances=$(aws ec2 describe-instances --filters "Name=tag:name,Values=ece408.project" "Name=instance-state-code,Values=16" | jq -j '[.Reservations[].Instances[].InstanceId] | join(" --instance-ids ")')
-aws ec2 reboot-instances --no-dry-run --instance-ids ${instances}
-```
+    instances=$(aws ec2 describe-instances --filters "Name=tag:name,Values=ece408.project" "Name=instance-state-code,Values=16" | jq -j '[.Reservations[].Instances[].InstanceId] | join(" --instance-ids ")')
+    aws ec2 reboot-instances --no-dry-run --instance-ids ${instances}
 
 ## Logs
 
 If `journald` is enabled, then you can view the server logs using `journalctl -f -u raid.service`
 
+## Reporting Issues
+
+If emailing with a problem, then please include the output of
+
+```bash
+rai version
+```
+
+as well as the output of
+
+```bash
+rai buildtime
+```
+
+In your bug report. You can also invoke the `rai` command with verbose and debug outputs using
+
+    rai --verbose --debug
+
+Please use the [Github issue manager] to report any issues or suggestions about the server.
 
 ## License
 
