@@ -460,6 +460,24 @@ execution:
 -   Install Cadvistor (github.com/google/cadvisor) to examine the health of the docker container and monitor them.
 -   Make sure that you have enough disk space. For example, last year the redis server ran out of disk space 2-3 days before the deadline.
 
+
+#### Increasing Max Open File Limit
+
+Edit `/etc/security/limits.conf` and add 
+
+```
+*         hard    nofile      500000
+*         soft    nofile      500000
+root      hard    nofile      500000
+root      soft    nofile      500000
+```
+
+You should now reboot the computer. You can check to see if the new limits are observed by running
+
+```
+ulimit -Sn
+```
+
 #### AWS Admin Notes
 
 ##### Reboot all AWS Instances
