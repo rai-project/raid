@@ -147,6 +147,27 @@ Prebuilt binaries exist on S3 at /files.rai-project.com/dist/rai-docker-volume/s
 
 See [rai-project/rai](https://github.com/rai-project/rai#download-binaries)
 
+## RAID server installation
+
+### Provisioning an Ubuntu machine on AWS
+
+Increase the open file limit:
+
+add the following to `/etc/security/limits.conf`
+
+    root soft nofile 65536
+    root hard nofile 65536
+    * soft nofile 65536
+    * hard nofile 65536
+
+add the following to `/etc/pam.d/common-session` and `/etc/pam.d/common-session-noninteractive`
+
+    session required pam_limits.so
+
+Reboot. Check the open file limit with
+
+    ulimit -n
+
 ## RAID Server Installation from Binary
 
 Prebuilt raid binaries exist on s3 in /files.rai-project.com/dist/raid/stable/latest
