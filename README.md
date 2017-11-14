@@ -418,7 +418,9 @@ Make sure the raid.service service has been started.
 ```sh
 sudo systemctl status raid
 ```
+Example output below:
 
+```sh
 ● raid.service - RAID
    Loaded: loaded (/lib/systemd/system/raid.service; enabled; vendor preset: enabled)
    Active: active (running) since Tue 2017-11-14 06:32:59 UTC; 2min 0s ago
@@ -429,6 +431,7 @@ sudo systemctl status raid
       CPU: 78ms
    CGroup: /system.slice/raid.service
            └─5515 /usr/lib/raid/raid --config=/usr/lib/raid/rai_config.yml --queue=rai_amd64
+```
 
 In particular make sure raid is loaded, active, and enabled.
 
