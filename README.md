@@ -430,13 +430,6 @@ sudo systemctl status raid
    CGroup: /system.slice/raid.service
            └─5515 /usr/lib/raid/raid --config=/usr/lib/raid/rai_config.yml --queue=rai_amd64
 
-Nov 14 06:32:59 ip-172-31-4-193 systemd[1]: Started RAID.
-Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: read config /usr/lib/raid/rai_config.yml
-Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: [/usr/lib/raid/rai_config.yml]Finished setting configuration...
-Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: DEBU[0000] Starting worker1                              pkg=server met
-Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: DEBU[0000] Starting worker2                              pkg=server met
-Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: DEBU[0000] Server subscribed to rai_amd64 queue          pkg=server met
-
 In particular make sure raid is loaded, active, and enabled.
 
 #### Setting up NVIDIA Persistence Mode
