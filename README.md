@@ -157,7 +157,7 @@ See [rai-project/rai](https://github.com/rai-project/rai#download-binaries)
 
 ## RAID server installation
 
-### Provisioning an Ubuntu machine on AWS
+### Provisioning Ubuntu machine on AWS
 
 Increase the open file limit:
 
@@ -399,12 +399,51 @@ The above command will exit when a user exists the terminal session. Use the noh
 ```sh
     nohup ./raid –d -v –s ${MY_SECRET} &
 ```
+#### Starting raid and associated services on reboot
+
+
+Copy the systemd service in 'raid/build/raid.service' to '/etc/systemd/system'.
+Enable auto start on reboot.
+
+
+```sh
+sudo cp raid/build/raid.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl start raid.service
+sudo systemctl enable raid
+```
+
+Make sure the raid.service service has been started.
+
+```sh
+sudo systemctl status raid
+```
+
+● raid.service - RAID
+   Loaded: loaded (/lib/systemd/system/raid.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2017-11-14 06:32:59 UTC; 2min 0s ago
+     Docs: https://github.com/rai-project/raid
+ Main PID: 5515 (raid)
+    Tasks: 9
+   Memory: 7.3M
+      CPU: 78ms
+   CGroup: /system.slice/raid.service
+           └─5515 /usr/lib/raid/raid --config=/usr/lib/raid/rai_config.yml --queue=rai_amd64
+
+Nov 14 06:32:59 ip-172-31-4-193 systemd[1]: Started RAID.
+Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: read config /usr/lib/raid/rai_config.yml
+Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: [/usr/lib/raid/rai_config.yml]Finished setting configuration...
+Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: DEBU[0000] Starting worker1                              pkg=server met
+Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: DEBU[0000] Starting worker2                              pkg=server met
+Nov 14 06:32:59 ip-172-31-4-193 raid[5515]: DEBU[0000] Server subscribed to rai_amd64 queue          pkg=server met
+
+In particular make sure raid is loaded, active, and enabled.
 
 #### Setting up NVIDIA Persistence Mode
 
 If using CUDA, make sure to [enable persistence mode](http://docs.nvidia.com/deploy/driver-persistence/index.html).
 
-Copy the the systemd service in `build/systemd/nvidia-persistenced.service` and modify the line
+Copy the systemd service in `build/systemd/nvidia-persistenced.service` and modify the line
 
     ExecStart=/usr/bin/nvidia-persistenced --user ubuntu
 
@@ -414,10 +453,11 @@ Once modified, copy the file to `/etc/systemd/system/` and start the systemd ser
 ```sh
 sudo mv nvidia-persistenced.service /etc/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl start nvidia-persistenced.service
+sudo systemctl start nvidia-persistenced
+sudo systemctl enable nvidia-persistenced
 ```
 
-Make sure that the `nvidia-persistenced.service` service has been started. 
+Make sure that the `nvidia-persistenced.service` service has been started and enabled.
 The command
 
 ```sh
