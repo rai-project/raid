@@ -394,7 +394,7 @@ Table 1 : Command line options for raid server
 | **Verbose Mode**       | -v           |
 | **Application Secret** | -s MY_SECRET |
 
-The above command will exit when a user exists the terminal session. Use the nohup command to avoid that
+The above command will exit when a user exits the terminal session. Use the nohup command to avoid that
 
 ```sh
     nohup ./raid –d -v –s ${MY_SECRET} &
