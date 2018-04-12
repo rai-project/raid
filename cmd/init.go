@@ -8,25 +8,14 @@ import (
 	_ "github.com/rai-project/logger/hooks"
 )
 
-type dlog struct {
-	*logrus.Entry
-}
 
 var (
-	log dlog
+	log *logrus.Entry
 )
 
-func (d dlog) Error(v ...interface{}) error {
-	d.Error(v...)
-	return nil
-}
-func (d dlog) Warn(v ...interface{}) error {
-	d.Warn(v...)
-	return nil
-}
 
 func init() {
 	config.AfterInit(func() {
-		log = dlog{logger.New().WithField("pkg", "raid")}
+		log = logger.New().WithField("pkg", "raid")
 	})
 }
