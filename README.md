@@ -319,6 +319,7 @@ The client configuration configures the client for usage with a cluster of rai s
         upload_bucket: files.rai-project.com # base url or the store buceket
         bucket: userdata # location to store the uploaded user data (user input)
         build_file: rai_build # location to store the result build data (user output)
+        rai_queue_name: << Amazon AWS Simple Queue Service Name >>
     auth:
         provider: auth0 # the authentication provider
         domain: raiproject.auth0.com # the domain of the authentication provider
