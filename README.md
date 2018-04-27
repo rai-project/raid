@@ -362,6 +362,7 @@ All servers within a cluster share the same configuration. Here is the configura
         upload_bucket: files.rai-project.com # base url or the store buceket
         bucket: userdata # location to store the uploaded user data (user input)
         build_file: rai_build # location to store the result build data (user output)
+        rai_queue_name: << Amazon AWS Simple Queue Service Name >>
     auth:
         provider: auth0 # the authentication provider
         domain: raiproject.auth0.com # the domain of the authentication provider
@@ -375,6 +376,11 @@ All servers within a cluster share the same configuration. Here is the configura
 
 Other useful configuration options are `docker.time_limit` (default 1 hour), `docker.memory_limit` (default
 16gb)
+
+### rai_queue_name
+
+You can change the queue used by a server by changing the rai_queue_name in the server and client configuration files as described above.
+Instructions on how to create an Amazon AWS Simple Queue Service is described at the top of the README.  
 
 ### Start/Stop Server
 
