@@ -377,9 +377,14 @@ All servers within a cluster share the same configuration. Here is the configura
 Other useful configuration options are `docker.time_limit` (default 1 hour), `docker.memory_limit` (default
 16gb)
 
-### rai_queue_name
+### Changing the Listening Queue Name
 
-You can change the queue used by a server by changing the rai_queue_name in the server and client configuration files as described above.
+Changing the queue name is used for testing the server without interfering with the currently deployed servers, or to have different clients utilizing different server clusters.
+
+You can change the queue used by a server by changing the `rai_queue_name` option in the client section of the rai configuration configuration.
+The default value of the queue is the application name `rai` followed by an underscore, followed by the host machine architecture (`amd64`, `ppc64le`, ...).
+When running on a Power8 machine for example, the default server queue is `rai_ppc64le`.
+
 Instructions on how to create an Amazon AWS Simple Queue Service is described at the top of the README.  
 
 ### Start/Stop Server
