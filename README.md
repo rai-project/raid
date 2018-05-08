@@ -414,12 +414,12 @@ The above command will exit when a user exits the terminal session. Use the nohu
 #### Starting raid and associated services on reboot
 
 
-Copy the systemd service in 'raid/build/raid.service' to '/etc/systemd/system'.
+Copy the systemd service in '../raid/build/systemd/raid.service' to '/etc/systemd/system'.
 Enable auto start on reboot.
 
 
 ```sh
-sudo cp raid/build/raid.service /etc/systemd/system/
+sudo cp ../raid/build/systemd/raid.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl start raid.service
 sudo systemctl enable raid
