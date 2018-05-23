@@ -253,7 +253,7 @@ Now all the relevant repositories should now be in `$GOPATH/src/github.com/rai-p
 2.  Clone the `raid` repository
 
 ```sh
-go get -d github.com:rai-project/raid.git
+go get -d -u -v github.com/rai-project/raid
 ```
 
 3.  Install the software dependencies using `glide`.
