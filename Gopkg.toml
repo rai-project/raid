@@ -1,0 +1,78 @@
+# Gopkg.toml example
+#
+# Refer to https://github.com/golang/dep/blob/master/docs/Gopkg.toml.md
+# for detailed Gopkg.toml documentation.
+#
+# required = ["github.com/user/thing/cmd/thing"]
+# ignored = ["github.com/user/project/pkgX", "bitbucket.org/user/project/pkgA/pkgY"]
+#
+# [[constraint]]
+#   name = "github.com/user/project"
+#   version = "1.0.0"
+#
+# [[constraint]]
+#   name = "github.com/user/project2"
+#   branch = "dev"
+#   source = "github.com/myfork/project2"
+#
+# [[override]]
+#   name = "github.com/x/y"
+#   version = "2.4.0"
+#
+# [prune]
+#   non-go = false
+#   go-tests = true
+#   unused-packages = true
+
+
+[[constraint]]
+  name = "github.com/Unknwon/com"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "github.com/coreos/go-systemd"
+  version = "17.0.0"
+
+[[constraint]]
+  name = "github.com/fatih/color"
+  version = "1.7.0"
+
+[[constraint]]
+  name = "github.com/pkg/errors"
+  version = "0.8.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/rai-project/cmd"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/rai-project/config"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/rai-project/logger"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/rai-project/server"
+
+[[constraint]]
+  name = "github.com/sirupsen/logrus"
+  version = "1.0.5"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/spf13/cobra"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/spf13/viper"
+
+[[constraint]]
+  name = "github.com/vrecan/death"
+  version = "2.0.0"
+
+[prune]
+  go-tests = true
+  unused-packages = true
