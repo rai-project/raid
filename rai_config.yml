@@ -6,6 +6,10 @@ logger:
     - stackdriver
     - kinesis
     - syslog
+    - graylog
+graylog:
+  address: 34.199.189.82
+  port: 12201
 aws:
   access_key_id: ==AES32==PT1BRVMzMj094kOWYqYJ7IqWA7blVUTfxWdlkq9jJjDAVTTR0ZsXGgBXIbVSWPhlFz1mH7o=
   secret_access_key: ==AES32==PT1BRVMzMj09fISTFEtXHbTnpMDwiEv8Jn/Gxc6jJFOVgK0J6rncEwXzIs6EhJeYuI6BaLYJ8DmE7xsh4Pfqfy0RkHn8F2oGg08Vg/thMfQG
