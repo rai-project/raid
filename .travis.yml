@@ -9,7 +9,6 @@ before_install:
 - go get github.com/mitchellh/gox
 - go get github.com/tcnksm/ghr
 - go get github.com/sanbornm/go-selfupdate
-# setup dependency management tool
 - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 install:
 - dep ensure -v
