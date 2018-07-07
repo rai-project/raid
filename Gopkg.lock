@@ -31,8 +31,8 @@
 [[projects]]
   name = "github.com/Microsoft/go-winio"
   packages = ["."]
-  revision = "7da180ee92d8bd8bb8c37fc560e673e6557c392f"
-  version = "v0.4.7"
+  revision = "67921128fb397dd80339870d2193d6b1e6856fd4"
+  version = "v0.4.8"
 
 [[projects]]
   branch = "master"
@@ -45,6 +45,15 @@
   packages = ["."]
   revision = "28b053d5a2923b87ce8c5a08f3af779894a72758"
   version = "v1"
+
+[[projects]]
+  name = "github.com/airbrake/gobrake"
+  packages = [
+    ".",
+    "internal/lrucache"
+  ]
+  revision = "46cf8d6b67a66a18e50a082ebcf684756e262d6c"
+  version = "v3.6.0"
 
 [[projects]]
   branch = "master"
@@ -92,8 +101,8 @@
     "service/sqs",
     "service/sts"
   ]
-  revision = "e79e9fd4ec11ccc242a472f980be78830f9eba80"
-  version = "v1.14.13"
+  revision = "16cb9f62f8a8b7af4f38725567f5ce762e1d562b"
+  version = "v1.14.21"
 
 [[projects]]
   branch = "master"
@@ -106,12 +115,6 @@
   packages = ["."]
   revision = "2ea60e5f094469f9e65adb9cd103795b73ae743e"
   version = "v2.0.0"
-
-[[projects]]
-  name = "github.com/cheggaaa/pb"
-  packages = ["."]
-  revision = "2af8bbdea9e99e83b3ac400d8f6b6d1b8cbbf338"
-  version = "v1.0.25"
 
 [[projects]]
   branch = "master"
@@ -188,6 +191,7 @@
     "api/types/versions",
     "api/types/volume",
     "client",
+    "errdefs",
     "pkg/archive",
     "pkg/fileutils",
     "pkg/idtools",
@@ -204,7 +208,7 @@
     "pkg/term",
     "pkg/term/windows"
   ]
-  revision = "8e610b2b55bfd1bfa9436ab110d311f5e8a74dcb"
+  revision = "ae1160b8d8dd0b877bb58226852422c63b7210ce"
 
 [[projects]]
   branch = "master"
@@ -223,7 +227,7 @@
     "sdk",
     "volume"
   ]
-  revision = "61cb8e2334204460162c8bd2417cd43cb71da66f"
+  revision = "39e3ca757823ff8ec10601ed043c02d6d4074be8"
 
 [[projects]]
   name = "github.com/docker/go-units"
@@ -334,8 +338,8 @@
 [[projects]]
   name = "github.com/json-iterator/go"
   packages = ["."]
-  revision = "ca39e5af3ece67bbcda3d0f4f56a8e24d9f2dad4"
-  version = "1.1.3"
+  revision = "ab8a2e0c74be9d3be70b3184d9acc634935ded82"
+  version = "1.1.4"
 
 [[projects]]
   branch = "master"
@@ -427,8 +431,8 @@
 [[projects]]
   name = "github.com/modern-go/reflect2"
   packages = ["."]
-  revision = "1df9eeb2bb81f327b96228865c5687bc2194af3f"
-  version = "1.0.0"
+  revision = "4b7aa43c6742a2c18fdef89dd197aaae7dac7ccd"
+  version = "1.0.1"
 
 [[projects]]
   name = "github.com/opencontainers/go-digest"
@@ -452,7 +456,7 @@
     "libcontainer/system",
     "libcontainer/user"
   ]
-  revision = "2c632d1a2de0192c3f18a2542ccb6f30a8719b1f"
+  revision = "45e08f6ceb995a30a0b8ce042e451a1254d4c888"
 
 [[projects]]
   name = "github.com/patrickmn/go-cache"
@@ -482,19 +486,19 @@
   branch = "master"
   name = "github.com/rai-project/archive"
   packages = ["."]
-  revision = "92575d47c146d06169b9192249da27695e280df1"
+  revision = "624e908fb1a3c39ae2e1f1632047981a327836f1"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/auth"
   packages = ["."]
-  revision = "6973ebe4c6d230d345daea0cd98f904273eebfd7"
+  revision = "13c092cd1cd1848384006b4adb42cd6a58f3a095"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/aws"
   packages = ["."]
-  revision = "38ea1736ad4251d987210a82e7249c4f941e6e36"
+  revision = "9eea5368fb295cd4c9d508b23387e5b1ae86f5e9"
 
 [[projects]]
   branch = "master"
@@ -503,25 +507,25 @@
     ".",
     "sqs"
   ]
-  revision = "8cf44fd527129661e2e09cbcada05ac0a11c8a66"
+  revision = "b6ad3874caa70c954c7254a483209b657f48f768"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/cmd"
   packages = ["."]
-  revision = "16302904f7491e7777d69d621770f12ed9b6788f"
+  revision = "ac7ba16b7ebcdbfda9ac9a4eb3b96ea981a6eb63"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/config"
   packages = ["."]
-  revision = "c84109ab2515e922a25930ea437d20d2e86d1840"
+  revision = "b8a1f9848ca2a4288fa28f2f456ea4683069566a"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/context"
   packages = ["."]
-  revision = "6e5cf90688a4b0972a2442b71a7c41f9d9279fac"
+  revision = "066ec2b567c83f65077cf4d6e6892c7fabf80e14"
 
 [[projects]]
   branch = "master"
@@ -530,7 +534,7 @@
     ".",
     "mongodb"
   ]
-  revision = "1fb72edae24039b283c1341ed855404136a30559"
+  revision = "d45ec3f8f60e1bb3f80e1ac00b302ef4ecb3fd36"
 
 [[projects]]
   branch = "master"
@@ -539,7 +543,7 @@
     ".",
     "cuda"
   ]
-  revision = "e098713e07b2ce008502edeeeac538f337adc43a"
+  revision = "899df77fd7cb95d656110307a18f97c65e78c201"
 
 [[projects]]
   branch = "master"
@@ -551,13 +555,13 @@
   branch = "master"
   name = "github.com/rai-project/googlecloud"
   packages = ["."]
-  revision = "222e3220bb9594a3df8395a39542322cf9152a3b"
+  revision = "f07efb16d0e1764f3935e85420f065d8416c1c86"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/ldcache"
   packages = ["."]
-  revision = "22e037149db5f62391e7ac9ccd103dcfde3d7459"
+  revision = "eb20473994655d3fcfb567faa4a92caf31e55e91"
 
 [[projects]]
   branch = "master"
@@ -567,19 +571,19 @@
     "hooks",
     "hooks/logruzio"
   ]
-  revision = "87ef1d21520e8fc2ba204a431318d27a6606ca0a"
+  revision = "127c980833b2e3f43e5cb8cfb669d9a8060a89ce"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/model"
   packages = ["."]
-  revision = "5d9d8575908f0d80fd01ea1f3fd61a3982b4aaef"
+  revision = "e095c0b749b3017aca3e11a3eb6cbbc623d7978b"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/nvidia-smi"
   packages = ["."]
-  revision = "484ec7354c5b4045169aa6546fc0fbfc6417a434"
+  revision = "ac6ba763e77a1b30ce03e68e2a70af88338baf3e"
 
 [[projects]]
   branch = "master"
@@ -605,7 +609,7 @@
     ".",
     "redis"
   ]
-  revision = "d049b669dc190226aaadb7383db6b6ce52fc909a"
+  revision = "fde16c56df805e2d92e065d15ba300e34a09bd0c"
 
 [[projects]]
   branch = "master"
@@ -615,13 +619,13 @@
     "bson",
     "json"
   ]
-  revision = "d4f68b69a9979688d517dbbee0edf361bdca7c34"
+  revision = "55ef49250fca75b7a22ef5aa394e22b89943a70c"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/server"
   packages = ["."]
-  revision = "edb99251c1cf3ce4fd02fbd5d024bddcce3cc9ba"
+  revision = "afb8051235db33f143437a91382f313a4d30b5b3"
 
 [[projects]]
   branch = "master"
@@ -630,13 +634,13 @@
     ".",
     "s3"
   ]
-  revision = "b8a650f0699c5c81fcbac47f5c6a900db4548827"
+  revision = "c2933a6415f7e1564e25c0fec2b1eb1a7b2190dc"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/tegra"
   packages = ["."]
-  revision = "e67904ef854ae00a55270b7bc2a3a2bd875ee080"
+  revision = "6670bcd508d44c4b41f640cd14c3226d718d4a95"
 
 [[projects]]
   branch = "master"
@@ -645,19 +649,19 @@
     ".",
     "promise"
   ]
-  revision = "7fc9f204468c772f18442d462725c88a52a3f3ce"
+  revision = "7cc954f4f45db4d1af4ad4ff449accedc68f5774"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/uuid"
   packages = ["."]
-  revision = "9d1dfc0fdb4f216bcbe4349da0997301f1123e29"
+  revision = "4745e418073472528c60eb77ec47724a04b23fd8"
 
 [[projects]]
   branch = "master"
   name = "github.com/rai-project/vipertags"
   packages = ["."]
-  revision = "1ba1bde0b4ed99b017e484a31738af53d0b0c81d"
+  revision = "92806c8ec658b5bc4ef66f6e51f835937a9e616e"
 
 [[projects]]
   name = "github.com/russross/blackfriday"
@@ -708,7 +712,7 @@
     ".",
     "doc"
   ]
-  revision = "1e58aa3361fd650121dceeedc399e7189c05674a"
+  revision = "a114f312e075f65bf30d6d9a1430113f857e543b"
 
 [[projects]]
   branch = "master"
@@ -797,7 +801,7 @@
     "internal/socks",
     "proxy"
   ]
-  revision = "afe8f62b1d6bbd81f31868121a50b06d8188e1f9"
+  revision = "32a936f46389aa10549d60bd7833e54b01685d09"
 
 [[projects]]
   branch = "master"
@@ -825,7 +829,7 @@
     "unix",
     "windows"
   ]
-  revision = "a200a19cb90b19de298170992778b1fda7217bd6"
+  revision = "3c6ecd8f22c6f40fbeec94c000a069d7d87c7624"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -856,7 +860,7 @@
     "googleapi/internal/uritemplates",
     "logging/v2"
   ]
-  revision = "3639d6d93f377f39a1de765fa4ef37b3c7ca8bd9"
+  revision = "61180b1196c9b6bec3ea78396c7805bdc117dcdc"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -874,6 +878,23 @@
   ]
   revision = "b1f26356af11148e710935ed1ac8a7f5702c7612"
   version = "v1.1.0"
+
+[[projects]]
+  name = "gopkg.in/cheggaaa/pb.v1"
+  packages = ["."]
+  revision = "2af8bbdea9e99e83b3ac400d8f6b6d1b8cbbf338"
+  version = "v1.0.25"
+
+[[projects]]
+  name = "gopkg.in/gemnasium/logrus-airbrake-hook.v3"
+  packages = ["."]
+  revision = "cb25691e43299559827ffb285b0bb5626b722fa7"
+
+[[projects]]
+  name = "gopkg.in/gemnasium/logrus-graylog-hook.v2"
+  packages = ["."]
+  revision = "c4a7de647eaaac00ffea599b7773e5e6804fa3b7"
+  version = "v2.0.7"
 
 [[projects]]
   name = "gopkg.in/hlandau/easymetric.v1"
@@ -897,7 +918,7 @@
     "internal/sasl",
     "internal/scram"
   ]
-  revision = "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+  revision = "9856a29383ce1c59f308dd1cf0363a79b5bef6b5"
 
 [[projects]]
   name = "gopkg.in/redis.v5"
