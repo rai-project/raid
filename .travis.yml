@@ -2,14 +2,16 @@ language: go
 go:
 - '1.10.x'
 dist: trusty
-sudo: false
 before_install:
+- sudo dpkg --print-foreign-architectures
+- sudo dpkg --add-architecture i386
+- sudo apt-get install -qq --force-yes build-essential gcc-multilib g++-multilib > /dev/null
+- curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 - go get github.com/mjibson/esc
 - go get github.com/ahmetb/govvv
 - go get github.com/mitchellh/gox
 - go get github.com/tcnksm/ghr
 - go get github.com/sanbornm/go-selfupdate
-- curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 install:
 - dep ensure -v
 - rm -fr vendor/github.com/Sirupsen
