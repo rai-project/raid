@@ -1,29 +1,35 @@
-# Test against this version of Node.js
+
+version: build-{build}.{branch}
+
+clone_folder: C:\gopath\src\github.com\rai-project\raid
+shallow_clone: true
+
 environment:
+  GOPATH: C:\gopath
   matrix:
-    # node.js
-    - nodejs_version: "6.0"
-    - nodejs_version: "5.0"
-    - nodejs_version: "4.0"
-    - nodejs_version: "0.12"
-    - nodejs_version: "0.10"
+    - environment:
+      GOVERSION: 1.10.x
 
-# Install scripts. (runs after repo cloning)
+platform:
+- x64
+
+init:
+- git config --global core.autocrlf input
+
 install:
-  # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node $env:nodejs_version
-  # install modules
-  - npm install
+# Install the specific Go version.
+- rmdir c:\go /s /q
+- appveyor DownloadFile https://storage.googleapis.com/golang/go%GOVERSION%.windows-amd64.msi
+- msiexec /i go%GOVERSION%.windows-amd64.msi /q
+- set Path=c:\go\bin;c:\gopath\bin;%Path%
+- go version
+- go env
+- go get -u github.com/golang/dep/cmd/dep
 
-# Post-install test scripts.
+
 test_script:
-  - echo "Skip tests..."
-after_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
-  # run tests
-  - npm test
+- C:\gopath\bin\dep ensure -v
+- go build
 
-# Don't actually build.
-build: off
+build: false
+deploy: false
