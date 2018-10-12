@@ -143,10 +143,9 @@ To backup the database, instructions from [here]:(https://docs.mongodb.com/manua
 
 Install a redis server. A docker container can also be used.
 
-### CUDA Volume
+### CUDA Docker Integration
 
 Rai offers two ways of using GPUs within the system. Either the `nvidia-docker` approach (**recommended**) or the `rai-cuda` approach should work.
-
 
 
 #### NVIDIA-Docker
