@@ -143,7 +143,17 @@ To backup the database, instructions from [here]:(https://docs.mongodb.com/manua
 
 Install a redis server. A docker container can also be used.
 
-### CUDA Volume Plugin
+### CUDA Volume
+
+Rai offers two ways of using GPUs within the system. Either the `nvidia-docker` approach (**recommended**) or the `rai-cuda` approach should work.
+
+
+
+#### NVIDIA-Docker
+
+Install the `nvidia-docker` package. Installation instructions can be found [here](https://github.com/NVIDIA/nvidia-docker#quickstart)
+
+#### Rai CUDA Volume Plugin
 
 Follow the instructions at [rai-project/rai-docker-volume](https://github.com/rai-project/rai-docker-volume#rai-docker-volume).
 
@@ -201,8 +211,8 @@ This is sometimes done for you by default.
 
 You can then install the Go 1.8 binary and set it as the default
 
-    gvm install go1.8 -B
-    gvm use go1.8 --default
+    gvm install go1.11 -B
+    gvm use go1.11 --default
 
 `gvm` will setup both your `$GOPATH` and `$GOROOT` and you can validate that the installation completed by invoking
 
@@ -214,10 +224,10 @@ GOEXE=""
 GOHOSTARCH="amd64"
 GOHOSTOS="linux"
 GOOS="linux"
-GOPATH="/home/abduld/.gvm/pkgsets/go1.8/global"
+GOPATH="/home/abduld/.gvm/pkgsets/go1.11/global"
 GORACE=""
-GOROOT="/home/abduld/.gvm/gos/go1.8"
-GOTOOLDIR="/home/abduld/.gvm/gos/go1.8/pkg/tool/linux_amd64"
+GOROOT="/home/abduld/.gvm/gos/go1.11"
+GOTOOLDIR="/home/abduld/.gvm/gos/go1.11/pkg/tool/linux_amd64"
 GCCGO="gccgo"
 CC="gcc"
 GOGCCFLAGS="-fPIC -m64 -pthread -fmessage-length=0 -fdebug-prefix-map=/tmp/go-build917072201=/tmp/go-build -gno-record-gcc-switches"
