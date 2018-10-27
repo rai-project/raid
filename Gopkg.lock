@@ -80,7 +80,7 @@
   revision = "eb2c6b5be1b66bab83016e0b05f01b8d5496ffbd"
 
 [[projects]]
-  digest = "1:9f19a93b8b24e3ed082f99e5d63585c298965341b4bea9d0fa559e3cdac1f293"
+  digest = "1:e163c2a67e9d37dc256efb29fb89e8ca6cbbeed8fd7a59c1663f930aa0672898"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -124,8 +124,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "f76d9803fd695eebf74cb23c460287fa496efc21"
-  version = "v1.15.63"
+  revision = "34ab03ee1a2b90b3baf97ff666397c8fb9b8714b"
+  version = "v1.15.64"
 
 [[projects]]
   branch = "master"
@@ -213,7 +213,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:8e05affa9b0f100756a00fc0ba134dd95a638e3f73f2b0e16b48c48894cf0139"
+  digest = "1:ed8d0118328f5963dea99072fc5205c7dd03c2c8bbf71b90ca4b174a74a73b10"
   name = "github.com/docker/docker"
   packages = [
     "api",
@@ -251,7 +251,7 @@
     "pkg/term/windows",
   ]
   pruneopts = "UT"
-  revision = "bc4c1c238b551ce58fc26690523354d1571bab1d"
+  revision = "b8e87cfdad8daa6ef782ddb90691a259483bc8e4"
 
 [[projects]]
   branch = "master"
@@ -550,7 +550,7 @@
     "pkg/sys",
   ]
   pruneopts = "UT"
-  revision = "3f643acb99deaf5dcfbafe9680f08cf3a14dee61"
+  revision = "c6ec3fdfbaad873834df9ddebec7fa7fe5c125be"
 
 [[projects]]
   branch = "master"
@@ -664,19 +664,19 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:7e3092c800e0bb8c1d2aecd2e09b2d69a3f2aea7b2272e2cd86bf46ee0457ff2"
+  digest = "1:ba5ce2fd5c702aa60bea85c878e9ffd7726a228ce79e9f2537791a8a8786ae27"
   name = "github.com/rai-project/auth"
   packages = ["."]
   pruneopts = "UT"
-  revision = "404e1c137be4257bb57917ed702772a6f3032b9c"
+  revision = "f06ec209b357d87f7a7966622200ea7fae172257"
 
 [[projects]]
   branch = "master"
-  digest = "1:d6c3f105f8c8d7bcc5378e8e25777cd117d6ed117938b2b03c033ccdc24766b2"
+  digest = "1:b977a32cf7bc5e6235589c19c166d10675247634b10f8cbefc6b7b6e289fb0a3"
   name = "github.com/rai-project/aws"
   packages = ["."]
   pruneopts = "UT"
-  revision = "648d87fdbecb675bbf68c01b794861c987f6f847"
+  revision = "c2385f07f2959d2dce9c4ccfa3e087664387ab51"
 
 [[projects]]
   branch = "master"
@@ -762,11 +762,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:c7a8cb1a409f81a56d303fd2a526b7979affc26ff6dd111453efdfadc2cd367a"
+  digest = "1:9d0725e64e1f90ddc411c751d44911c1ef5df08bdc03c7a22000dfeacfa5c1d0"
   name = "github.com/rai-project/model"
   packages = ["."]
   pruneopts = "UT"
-  revision = "21eb33068eebfa9cb3dc6dc35ce1efb1363e9978"
+  revision = "ac2d1d1ff12d765797a4157f59c57c9c91a36ed0"
 
 [[projects]]
   branch = "master"
@@ -820,11 +820,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:ca005bab225917c9ccfd610f525942a4a3b550c8ae2dd77c6315251301d9c562"
+  digest = "1:f99a56d961d9f1c46b515a5b9ca1a2501c5f7de382fec0258598b4fea060642c"
   name = "github.com/rai-project/server"
   packages = ["."]
   pruneopts = "UT"
-  revision = "e59a81c42abfa0d01a5346bf41336d1bd45e650a"
+  revision = "a395a5b2c5e5351e6702e819980c8302368ecf0c"
 
 [[projects]]
   branch = "master"
@@ -1070,7 +1070,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:11bdb67c7c8b82ab467665706f5655b9bf8e3af3df58a4ad1d58e2a8ee706be8"
+  digest = "1:c792f70b12a2499e6b1364f1576cb11da51f5964356511c1a07314d9b468444f"
   name = "golang.org/x/sys"
   packages = [
     "cpu",
@@ -1078,7 +1078,7 @@
     "windows",
   ]
   pruneopts = "UT"
-  revision = "2772b66316d2c587efeb188dcd5ebc6987656e84"
+  revision = "95b1ffbd15a57cc5abb3f04402b9e8ec0016a52c"
 
 [[projects]]
   digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
