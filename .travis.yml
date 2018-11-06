@@ -30,10 +30,7 @@ before_install:
 - go get -u github.com/goreleaser/nfpm/...
 - go get github.com/aktau/github-release
 - go get -d github.com/goreleaser/goreleaser
-- cd $GOPATH/src/github.com/goreleaser/goreleaser
-- dep ensure -vendor-only -v
-- make setup build
-- go install
+- go install github.com/goreleaser/goreleaser
 - cd ${TRAVIS_BUILD_DIR}
 - sed -i "s/\${APP_SECRET}/${APP_SECRET}/" ${TRAVIS_BUILD_DIR}/.goreleaser.yml
 - dep ensure -v
