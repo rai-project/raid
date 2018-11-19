@@ -1,79 +1,74 @@
 language: go
 go:
-- '1.11.x'
+  - "1.11.x"
 dist: xenial
 sudo: required
 addons:
   apt:
     packages:
-    # needed for the nfpm pipe:
-    - rpm
+      # needed for the nfpm pipe:
+      - rpm
 # needed for the docker pipe
 services:
-- docker
+  - docker
 before_install:
-- sudo dpkg --print-foreign-architectures
-- sudo dpkg --add-architecture i386
-- sudo apt-get install -qq --force-yes build-essential gcc-multilib g++-multilib > /dev/null
-- curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-- gem install --no-ri --no-rdoc fpm
-- go get -u golang.org/x/tools/cmd/stringer
-- go get -u golang.org/x/tools/cmd/cover
-- go get github.com/mjibson/esc
-- go get github.com/ahmetb/govvv
-- go get github.com/mitchellh/gox
-- go get github.com/tcnksm/ghr
-- go get github.com/sanbornm/go-selfupdate
-- go get github.com/laher/bump/...
-- go get github.com/gordonklaus/ineffassign
-- go get github.com/client9/misspell/cmd/misspell
-- go get -u github.com/goreleaser/nfpm/...
-- go get github.com/aktau/github-release
-- go get -d github.com/goreleaser/goreleaser
-- go install github.com/goreleaser/goreleaser
-- cd ${TRAVIS_BUILD_DIR}
-- sed -i "s/\${APP_SECRET}/${APP_SECRET}/" ${TRAVIS_BUILD_DIR}/.goreleaser.yml
-- dep ensure -v
-- rm -fr vendor/github.com/Sirupsen
-- find vendor -type f -exec sed -i 's/Sirupsen/sirupsen/g' {} +
+  - sudo dpkg --print-foreign-architectures
+  - sudo dpkg --add-architecture i386
+  - sudo apt-get install -qq --force-yes build-essential gcc-multilib g++-multilib > /dev/null
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - gem install --no-ri --no-rdoc fpm
+  - go get -u golang.org/x/tools/cmd/stringer
+  - go get -u golang.org/x/tools/cmd/cover
+  - go get github.com/mjibson/esc
+  - go get github.com/ahmetb/govvv
+  - go get github.com/mitchellh/gox
+  - go get github.com/tcnksm/ghr
+  - go get github.com/sanbornm/go-selfupdate
+  - go get github.com/laher/bump/...
+  - go get github.com/gordonklaus/ineffassign
+  - go get github.com/client9/misspell/cmd/misspell
+  - go get -u github.com/goreleaser/nfpm/...
+  - go get github.com/aktau/github-release
+  - go get -d github.com/goreleaser/goreleaser
+  - go install github.com/goreleaser/goreleaser
+  - cd ${TRAVIS_BUILD_DIR}
+  - sed -i "s/\${APP_SECRET}/${APP_SECRET}/" ${TRAVIS_BUILD_DIR}/.goreleaser.yml
 install:
-- dep ensure -v
-- rm -fr vendor/github.com/Sirupsen
-- find vendor -type f -exec sed -i 's/Sirupsen/sirupsen/g' {} +
+  - dep ensure -v
 script:
-- cd ${TRAVIS_BUILD_DIR}/cmd && go generate && cd ${TRAVIS_BUILD_DIR}
-- VERSION=$(cat ./VERSION)
-- echo "VERSION = ${VERSION}"
-- DIST=${TRAVIS_BUILD_DIR}/dist/raid/stable
-- CGO_ENABLED=0 gox -verbose  -os="linux darwin" -arch="amd64 386" -osarch="!darwin/arm64 linux/ppc64le" -ldflags="$(govvv
-  -flags) -s -w -X main.AppSecret=${APP_SECRET} -extldflags
-  \"-static\"" -output="${DIST}/${VERSION}/{{.OS}}-{{.Arch}}/{{.Dir}}" .
+  - cd ${TRAVIS_BUILD_DIR}/cmd && go generate && cd ${TRAVIS_BUILD_DIR}
+  - VERSION=$(cat ./VERSION)
+  - echo "VERSION = ${VERSION}"
+  - DIST=${TRAVIS_BUILD_DIR}/dist/raid/stable
+  - CGO_ENABLED=0 gox -verbose  -os="linux darwin" -arch="amd64 386" -osarch="!darwin/arm64 linux/ppc64le" -ldflags="$(govvv
+    -flags) -s -w -X main.AppSecret=${APP_SECRET} -extldflags
+    \"-static\"" -output="${DIST}/${VERSION}/{{.OS}}-{{.Arch}}/{{.Dir}}" .
 before_deploy:
-- echo "go-selfupdate generating bindiffs"
-- mkdir -p ${DIST}/${VERSION}/binaries
-- mkdir -p ${DIST}/latest
-#- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/darwin-386     ${DIST}/${VERSION}/darwin-386/raid        ${TRAVIS_BUILD_DIR}/LICENSE.TXT
-#  ${TRAVIS_BUILD_DIR}/VERSION
-- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/darwin-amd64   ${DIST}/${VERSION}/darwin-amd64/raid      ${TRAVIS_BUILD_DIR}/LICENSE.TXT
-  ${TRAVIS_BUILD_DIR}/VERSION
-- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-386      ${DIST}/${VERSION}/linux-386/raid         ${TRAVIS_BUILD_DIR}/LICENSE.TXT
-  ${TRAVIS_BUILD_DIR}/VERSION
-- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-amd64    ${DIST}/${VERSION}/linux-amd64/raid       ${TRAVIS_BUILD_DIR}/LICENSE.TXT
-  ${TRAVIS_BUILD_DIR}/VERSION
-#- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-arm64    ${DIST}/${VERSION}/linux-arm64/raid       ${TRAVIS_BUILD_DIR}/LICENSE.TXT
-#  ${TRAVIS_BUILD_DIR}/VERSION
-- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-ppc64le  ${DIST}/${VERSION}/linux-ppc64le/raid     ${TRAVIS_BUILD_DIR}/LICENSE.TXT
-  ${TRAVIS_BUILD_DIR}/VERSION
-- go-selfupdate -o ${DIST}/updates ${DIST}/${VERSION}/binaries/ ${VERSION}
-# - cp ${DIST}/${VERSION}/binaries/darwin-386    ${DIST}/latest/darwin-386.tar.gz
-- cp ${DIST}/${VERSION}/binaries/darwin-amd64  ${DIST}/latest/darwin-amd64.tar.gz
-- cp ${DIST}/${VERSION}/binaries/linux-386     ${DIST}/latest/linux-386.tar.gz
-- cp ${DIST}/${VERSION}/binaries/linux-amd64   ${DIST}/latest/linux-amd64.tar.gz
-#- cp ${DIST}/${VERSION}/binaries/linux-arm64   ${DIST}/latest/linux-arm64.tar.gz
-- cp ${DIST}/${VERSION}/binaries/linux-ppc64le ${DIST}/latest/linux-ppc64le.tar.gz
-- rm -fr ${DIST}/${VERSION}/binaries
-- echo "Copying latest directory to ${DIST}/${TRAVIS_COMMIT}"
-- cp -r ${DIST}/latest ${DIST}/${TRAVIS_COMMIT}
+  - echo "go-selfupdate generating bindiffs"
+  - mkdir -p ${DIST}/${VERSION}/binaries
+  - mkdir -p ${DIST}/latest
+  #- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/darwin-386     ${DIST}/${VERSION}/darwin-386/raid        ${TRAVIS_BUILD_DIR}/LICENSE.TXT
+  #  ${TRAVIS_BUILD_DIR}/VERSION
+  - tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/darwin-amd64   ${DIST}/${VERSION}/darwin-amd64/raid      ${TRAVIS_BUILD_DIR}/LICENSE.TXT
+    ${TRAVIS_BUILD_DIR}/VERSION
+  - tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-386      ${DIST}/${VERSION}/linux-386/raid         ${TRAVIS_BUILD_DIR}/LICENSE.TXT
+    ${TRAVIS_BUILD_DIR}/VERSION
+  - tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-amd64    ${DIST}/${VERSION}/linux-amd64/raid       ${TRAVIS_BUILD_DIR}/LICENSE.TXT
+    ${TRAVIS_BUILD_DIR}/VERSION
+  #- tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-arm64    ${DIST}/${VERSION}/linux-arm64/raid       ${TRAVIS_BUILD_DIR}/LICENSE.TXT
+  #  ${TRAVIS_BUILD_DIR}/VERSION
+  - tar --transform 's/.*\///g' -czvf ${DIST}/${VERSION}/binaries/linux-ppc64le  ${DIST}/${VERSION}/linux-ppc64le/raid     ${TRAVIS_BUILD_DIR}/LICENSE.TXT
+    ${TRAVIS_BUILD_DIR}/VERSION
+  - go-selfupdate -o ${DIST}/updates ${DIST}/${VERSION}/binaries/ ${VERSION}
+  # - cp ${DIST}/${VERSION}/binaries/darwin-386    ${DIST}/latest/darwin-386.tar.gz
+  - cp ${DIST}/${VERSION}/binaries/darwin-amd64  ${DIST}/latest/darwin-amd64.tar.gz
+  - cp ${DIST}/${VERSION}/binaries/linux-386     ${DIST}/latest/linux-386.tar.gz
+  - cp ${DIST}/${VERSION}/binaries/linux-amd64   ${DIST}/latest/linux-amd64.tar.gz
+  #- cp ${DIST}/${VERSION}/binaries/linux-arm64   ${DIST}/latest/linux-arm64.tar.gz
+  - cp ${DIST}/${VERSION}/binaries/linux-ppc64le ${DIST}/latest/linux-ppc64le.tar.gz
+  - rm -fr ${DIST}/${VERSION}/binaries
+  - echo "Copying latest directory to ${DIST}/${TRAVIS_COMMIT}"
+  - cp -r ${DIST}/latest ${DIST}/${TRAVIS_COMMIT}
 deploy:
   provider: s3
   access_key_id: AKIAIAFSJLCCOYB5V3EQ
