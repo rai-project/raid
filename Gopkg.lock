@@ -80,7 +80,7 @@
   revision = "eb2c6b5be1b66bab83016e0b05f01b8d5496ffbd"
 
 [[projects]]
-  digest = "1:dfc4fa483c46b5dee0dde92a1e19f12addca0b58bb7cb3bfc6daf2dc8f3eabb7"
+  digest = "1:72466fb99d333a5f5f3aaf43a098b742e3f831472515a7a55feda371490efc58"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -124,8 +124,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "5ebc7a404e942062fd3aa7ff50975498716eb990"
-  version = "v1.15.78"
+  revision = "ceab7b7ac6f535d1397f124620720b5145f1ad59"
+  version = "v1.15.88"
 
 [[projects]]
   branch = "master"
@@ -136,12 +136,12 @@
   revision = "ee74d2f83d82cd1d2e92ed3ec3dbaf162ca5ece5"
 
 [[projects]]
-  digest = "1:2209584c0f7c9b68c23374e659357ab546e1b70eec2761f03280f69a8fd23d77"
+  digest = "1:553f73a4171c265045ae4f5d3122429ecf2c9c0c232c91f336127fe45480104a"
   name = "github.com/cenkalti/backoff"
   packages = ["."]
   pruneopts = "UT"
-  revision = "2ea60e5f094469f9e65adb9cd103795b73ae743e"
-  version = "v2.0.0"
+  revision = "62661b46c4093e2c1f38d943e663db1a29873e80"
+  version = "v2.1.0"
 
 [[projects]]
   branch = "master"
@@ -209,11 +209,11 @@
     "reference",
   ]
   pruneopts = "UT"
-  revision = "93e082742a009850ac46962150b2f652a822c5ff"
+  revision = "d9e12182359e0893efd7546d4b764f6c24e3118c"
 
 [[projects]]
   branch = "master"
-  digest = "1:2d691fcff6f977d59e0a1f8f1cb572226b84f21cdf27eb8e779d6f65673b4967"
+  digest = "1:3f4572370144fc437cd513c6fdd40962a1966126cc7914cb426552b57e70131c"
   name = "github.com/docker/docker"
   packages = [
     "api",
@@ -251,7 +251,7 @@
     "pkg/term/windows",
   ]
   pruneopts = "UT"
-  revision = "287144db423cc951922ee3607f024f70f2a74d25"
+  revision = "baab736a364959f10a5ef86f0cd8a8e44bdcc576"
 
 [[projects]]
   branch = "master"
@@ -555,7 +555,7 @@
     "pkg/sys",
   ]
   pruneopts = "UT"
-  revision = "ef517bd0daeabf23407413a6acb3473753cb7757"
+  revision = "e7af31c2ff3f2b97975c5c53aaa142c002a55a71"
 
 [[projects]]
   branch = "master"
@@ -617,7 +617,7 @@
     "libcontainer/user",
   ]
   pruneopts = "UT"
-  revision = "785fd9c39da59273380dbcfe3e08b8cff69d386f"
+  revision = "4932620b6237ed2a91aa5b5ca8cca6a73c10311b"
 
 [[projects]]
   digest = "1:808cdddf087fb64baeae67b8dfaee2069034d9704923a3cb8bd96a995421a625"
@@ -685,7 +685,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:b961219221cc15412a8fe85daa2246c962acf69747d6293541d4d2b4fa9958e0"
+  digest = "1:9aebbe2930d5847fa8bdd955b74ae0c69bfa09683b9c8868b804fba7ba1a3ab0"
   name = "github.com/rai-project/broker"
   packages = [
     ".",
@@ -693,7 +693,7 @@
     "sqs",
   ]
   pruneopts = "UT"
-  revision = "751e29719c77de9df2a9f3ac12d6df6d4220296d"
+  revision = "2aa8f364fa763bc6554250b49a23a6353f0c8422"
 
 [[projects]]
   branch = "master"
@@ -776,11 +776,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:0cb0779a91773f33fc3fc788cfa32b2ac4c8abffd9a9cad0ab9b0d6a38d42a21"
+  digest = "1:7d00eb6dcf14d69f8aab4be303cf07923cf025f8d5ac6ea9067bb6770951bb22"
   name = "github.com/rai-project/nvidia-smi"
   packages = ["."]
   pruneopts = "UT"
-  revision = "9318a34c190dad876a01bd2b5093dc6235d1c763"
+  revision = "5f6bbd4268777e33ec51313e4b6c0b89de084cbf"
 
 [[projects]]
   branch = "master"
@@ -827,11 +827,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:df13f1dc41dbefb541735308183a0eee86a92730dca243a892b37cfee8b66a86"
+  digest = "1:7a180eadd2ec19fe64d52121d8c62474b2cffbe87a365727c8996a5b1850e9da"
   name = "github.com/rai-project/server"
   packages = ["."]
   pruneopts = "UT"
-  revision = "efe267f2cebf500edf03387f43a187952bec95a5"
+  revision = "80bba67b9f7fcd9c6965df9b8ca7b441ed9bbf57"
 
 [[projects]]
   branch = "master"
@@ -946,14 +946,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:d6985179a6da66c400f68a5e673f48eddc814c5bca99a13bf31a04ab50352f48"
+  digest = "1:311feda30af27fb95669b9f0e545eaa835e361aeb952cb38b42c0052b3729c90"
   name = "github.com/spf13/cobra"
   packages = [
     ".",
     "doc",
   ]
   pruneopts = "UT"
-  revision = "fe5e611709b0c57fa4a89136deaa8e1d4004d053"
+  revision = "d2d81d9a96e23f0255397222bb0b4e3165e492dc"
 
 [[projects]]
   branch = "master"
@@ -1038,7 +1038,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:31deae2bfb1dc3c99c28c27f95a64cb284f335a7710fa04d85d3ccae519b1a72"
+  digest = "1:709882a697336b8c671ab2ab5ba5191dcc66e9a193692f8db0d9a3629a3c8c4a"
   name = "golang.org/x/crypto"
   packages = [
     "argon2",
@@ -1057,7 +1057,7 @@
     "ssh/terminal",
   ]
   pruneopts = "UT"
-  revision = "3d3f9f413869b949e48070b5bc593aa22cc2b8f2"
+  revision = "eb0de9b17e854e9b1ccd9963efafc79862359959"
 
 [[projects]]
   branch = "master"
@@ -1070,11 +1070,11 @@
     "proxy",
   ]
   pruneopts = "UT"
-  revision = "adae6a3d119ae4890b46832a2e88a95adc62b8e7"
+  revision = "fae4c4e3ad76c295c3d6d259f898136b4bf833a8"
 
 [[projects]]
   branch = "master"
-  digest = "1:d71cf3891adad6f2d608396a8da36e90ac46cd51e34d5a75a31385d2682b43ce"
+  digest = "1:632f90938b07f6e07ec6d2118f8af83add0aba9ff07d96f879fb9785797104f5"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
@@ -1084,7 +1084,7 @@
     "jwt",
   ]
   pruneopts = "UT"
-  revision = "f42d05182288abf10faef86d16c0d07b8d40ea2d"
+  revision = "28207608b83849a028d4f12e46533a6b6894ecaf"
 
 [[projects]]
   branch = "master"
@@ -1096,7 +1096,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:58ddfe5d263625d997ae49a44f5329e456e7078dd4b451ce9c5d1816db148438"
+  digest = "1:401fc17cbc8a7c6ac25639d63c110385b2a04fab2911d9bad13366771b6e4df6"
   name = "golang.org/x/sys"
   packages = [
     "cpu",
@@ -1104,7 +1104,7 @@
     "windows",
   ]
   pruneopts = "UT"
-  revision = "93218def8b18e66adbdab3eca8ec334700329f1f"
+  revision = "4ed8d59d0b35e1e29334a206d1b3f38b1e5dfb31"
 
 [[projects]]
   digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
@@ -1131,7 +1131,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:b2be971af0f56a5516ea69c9b9f7c60dcfaa6c4aaac542ed6012049f92d1433a"
+  digest = "1:367ee31f4018628c296b742ae4e70831a083530aa2662d91e665bdd3fb3a6b61"
   name = "google.golang.org/api"
   packages = [
     "clouderrorreporting/v1beta1",
@@ -1141,7 +1141,7 @@
     "logging/v2",
   ]
   pruneopts = "UT"
-  revision = "83a9d304b1e613fc253e1e2710778642fe81af53"
+  revision = "af4fc4062c262223ddc2d92f5f35a93690db383a"
 
 [[projects]]
   digest = "1:d2a8db567a76203e3b41c1f632d86485ffd57f8e650a0d1b19d240671c2fddd7"
@@ -1236,12 +1236,12 @@
   version = "v5.2.9"
 
 [[projects]]
-  digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
+  digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "UT"
-  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
-  version = "v2.2.1"
+  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
+  version = "v2.2.2"
 
 [solve-meta]
   analyzer-name = "dep"
