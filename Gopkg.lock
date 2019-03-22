@@ -220,7 +220,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:f4837736d46630ad38fc015fc5353637992490abee320bad7d21141283e459ce"
+  digest = "1:7fb700929a567d0e13098d76741a9eb2ea4f75037c6f0e8582a29fff0c6c1296"
   name = "github.com/docker/docker"
   packages = [
     "api",
@@ -258,7 +258,7 @@
     "pkg/term/windows",
   ]
   pruneopts = "UT"
-  revision = "6daf5abfe27ae0f2e38d7f9413ba9773c3740cbc"
+  revision = "02ec758372cffd7325439e82337d63d0c23963f0"
 
 [[projects]]
   branch = "master"
@@ -1216,7 +1216,7 @@
   name = "google.golang.org/genproto"
   packages = ["googleapis/rpc/status"]
   pruneopts = "UT"
-  revision = "5fe7a883aa19554f42890211544aa549836af7b7"
+  revision = "e79c0c59cdb5e117ef82a6f885294df3d74065d5"
 
 [[projects]]
   digest = "1:4a251721b698c0e6285aec21d4ba3f79ddeccd903690144461b360ea7f948106"
