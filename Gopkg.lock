@@ -868,7 +868,7 @@
   name = "github.com/rai-project/server"
   packages = ["."]
   pruneopts = "UT"
-  revision = "08a6954597277333e673813788f53986eb4c4d75"
+  revision = "48beabc1401c3dd8ac0bcd1c96ecaffa8353174e"
 
 [[projects]]
   branch = "master"
@@ -1136,7 +1136,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:51e9c8a64ecddbba456f24b2119aade9dc8e062fc6d10b30548f75f483e08b76"
+  digest = "0:"
   name = "golang.org/x/sys"
   packages = [
     "cpu",
@@ -1144,7 +1144,7 @@
     "windows",
   ]
   pruneopts = "UT"
-  revision = "f7bb7a8bee54210937e93ec56d007d892c1f0580"
+  revision = "f49334f85ddcf0f08d7fb6dd7363e9e6d6b777eb"
 
 [[projects]]
   digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
