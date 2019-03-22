@@ -74,9 +74,9 @@ require (
 	github.com/rai-project/archive v0.0.0-20181119122706-a0a579624334
 	github.com/rai-project/auth v0.0.0-20181119122707-65e8b04f453b
 	github.com/rai-project/aws v0.0.0-20181119122706-0989b18a4aeb
-	github.com/rai-project/broker v0.0.0-20190321154556-1b22a7e78677
+	github.com/rai-project/broker v0.0.0-20190322075226-a67a8d78b145
 	github.com/rai-project/cmd v0.0.0-20181119122707-69f8e596de1c
-	github.com/rai-project/config v0.0.0-20190322071400-bda75afee811
+	github.com/rai-project/config v0.0.0-20190322074539-d39524e3455d
 	github.com/rai-project/context v0.0.0-20181119122706-fab459fa9005
 	github.com/rai-project/docker v0.0.0-20181119123731-86779e24c596
 	github.com/rai-project/godotenv v0.0.0-20180908223441-72ca456a35f4
@@ -88,7 +88,7 @@ require (
 	github.com/rai-project/passlib v0.0.0-20181013114510-cdf39dc0b8ea
 	github.com/rai-project/pubsub v0.0.0-20181119122706-54382750f361
 	github.com/rai-project/serializer v0.0.0-20181119122706-c73b52fef201
-	github.com/rai-project/server v0.0.0-20190322050547-8fa2d6eecbe1
+	github.com/rai-project/server v0.0.0-20190322080104-08a695459727
 	github.com/rai-project/store v0.0.0-20181119122707-25bd1ae26c95
 	github.com/rai-project/sys v0.0.0-20181012154908-0d9db63e6919
 	github.com/rai-project/tegra v0.0.0-20181119122707-1d9901ca382b

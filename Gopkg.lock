@@ -868,7 +868,7 @@
   name = "github.com/rai-project/server"
   packages = ["."]
   pruneopts = "UT"
-  revision = "ababb8cdfaae37488576342c6ed62774fc7b0a53"
+  revision = "08a6954597277333e673813788f53986eb4c4d75"
 
 [[projects]]
   branch = "master"

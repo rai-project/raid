@@ -418,10 +418,14 @@ github.com/rai-project/aws v0.0.0-20181119122706-0989b18a4aeb h1:8xJIe1MGpWfjrAR
 github.com/rai-project/aws v0.0.0-20181119122706-0989b18a4aeb/go.mod h1:/MRd9F9jNbRXkq5KtcGB/cF+zuijiY2dOTg0vNsO9+s=
 github.com/rai-project/broker v0.0.0-20190321154556-1b22a7e78677 h1:qs5wACnwy5YI0xh6J5wLuYzYu935SHUlvfcaOIwvr1A=
 github.com/rai-project/broker v0.0.0-20190321154556-1b22a7e78677/go.mod h1:Yg2L8YqqOIuaqZcH8uEYv8YG7eCJifOTcfUd5hppRVw=
+github.com/rai-project/broker v0.0.0-20190322075226-a67a8d78b145 h1:zXlGZf2H114CE0yajdeMxjMl/4zHeZ5zdrgXvV79cU4=
+github.com/rai-project/broker v0.0.0-20190322075226-a67a8d78b145/go.mod h1:Yg2L8YqqOIuaqZcH8uEYv8YG7eCJifOTcfUd5hppRVw=
 github.com/rai-project/cmd v0.0.0-20181119122707-69f8e596de1c h1:j7wXn+cN22Jsk2bJwWJ+C591IOiEwkh1DUxEy5bMYD4=
 github.com/rai-project/cmd v0.0.0-20181119122707-69f8e596de1c/go.mod h1:voMRF7J9OeV0H3rfmhdrcuq0Ea3ezkm4IYkcdeIOYj8=
 github.com/rai-project/config v0.0.0-20190322071400-bda75afee811 h1:/l+4OnyIbKNCgtLgNxLF5H31DuUNsRoatOnUE4FEv+8=
 github.com/rai-project/config v0.0.0-20190322071400-bda75afee811/go.mod h1:NGYIJHnNhNRYvFYWqSCbPqsnwJ6uLC4q2eddpInHgVk=
+github.com/rai-project/config v0.0.0-20190322074539-d39524e3455d h1:saWiM/UNGv7f8kpANBjtmRh6a086cAFFxRHFZPuGas8=
+github.com/rai-project/config v0.0.0-20190322074539-d39524e3455d/go.mod h1:NGYIJHnNhNRYvFYWqSCbPqsnwJ6uLC4q2eddpInHgVk=
 github.com/rai-project/context v0.0.0-20181119122706-fab459fa9005 h1:GlZeqjxwUoLtDl/YBfLSmOq+7lN1aNAZpMI2ozYWEAc=
 github.com/rai-project/context v0.0.0-20181119122706-fab459fa9005/go.mod h1:gD+QRawDYzSAl+HAwxzvLWVeCKO/MjPXW3hpChmjIyk=
 github.com/rai-project/docker v0.0.0-20181119123731-86779e24c596 h1:yCwbJDDMvPK6dFTb6iwjH7OI3rDNHSFEbNKg7IxNe8c=
@@ -446,6 +450,8 @@ github.com/rai-project/serializer v0.0.0-20181119122706-c73b52fef201 h1:bxUdihMh
 github.com/rai-project/serializer v0.0.0-20181119122706-c73b52fef201/go.mod h1:7XaCtNf+xikXPdvF9nNNgJ1Tv+ZAbJTSs8BV8w8gSL4=
 github.com/rai-project/server v0.0.0-20190322050547-8fa2d6eecbe1 h1:aZVNpKdGrW3UIxFUEvoQKBTUVBik6xeD9gTesKGJeo4=
 github.com/rai-project/server v0.0.0-20190322050547-8fa2d6eecbe1/go.mod h1:v/BTVejs3gbYn9YwjevWaxpaTr3Gh55hEilIu+3oY0E=
+github.com/rai-project/server v0.0.0-20190322080104-08a695459727 h1:XK85uOTkKGdk6hAw4ITtdxF0cpnnW8sKqnGd/NeYjds=
+github.com/rai-project/server v0.0.0-20190322080104-08a695459727/go.mod h1:DsMt3jYucgTZnGCsIQvANWqV7cUdxzhpbpBUzAeo8GA=
 github.com/rai-project/store v0.0.0-20181119122707-25bd1ae26c95 h1:eYVCEiRaZelun+HlnyX2ZmZAoXJfTQJ1F7CTEsDEu8U=
 github.com/rai-project/store v0.0.0-20181119122707-25bd1ae26c95/go.mod h1:hqHujQywzkALW3WEWgGdKCsDSl2FQuFxBZhqzhNTtnQ=
 github.com/rai-project/sys v0.0.0-20181012154908-0d9db63e6919 h1:Shn9URgfrKXRW71ji3LdDUgGKoQsvWKkazuvatjJ1Ik=
