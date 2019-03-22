@@ -258,7 +258,7 @@
     "pkg/term/windows",
   ]
   pruneopts = "UT"
-  revision = "02ec758372cffd7325439e82337d63d0c23963f0"
+  revision = "7c197c18d30e1683767709d69397ad1c0a5b2164"
 
 [[projects]]
   branch = "master"
@@ -864,11 +864,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:824149edaca2ff99b1ef2d12162f6208682689eebcc665876101091ab2fc2fbe"
+  digest = "1:cbcd59bda78229bab16d8f2f63a11541853f9f6ab3f48b926db0c9ebc29162b9"
   name = "github.com/rai-project/server"
   packages = ["."]
   pruneopts = "UT"
-  revision = "7f2e8396b0dd7aeb8b599039d2d50bc37f8cb410"
+  revision = "8fa2d6eecbe138410e7f342fe5f83e1df9a433bf"
 
 [[projects]]
   branch = "master"
