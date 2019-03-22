@@ -722,7 +722,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:5e63aaa37326bfdd28c2982a696130a2986390c33f22052bfeff89c087d431dc"
+  digest = "0:"
   name = "github.com/rai-project/broker"
   packages = [
     ".",
@@ -730,7 +730,7 @@
     "sqs",
   ]
   pruneopts = "UT"
-  revision = "1b22a7e7867718412e5f289cae07fbf21aeb914f"
+  revision = "e229512f1af216179e018eaae48b9343ad9dd929"
 
 [[projects]]
   branch = "master"
@@ -742,11 +742,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:b488d94d85842f2e63f3b291ecbc4e000d413f713ed6edf6ebf5370541ca98b6"
+  digest = "0:"
   name = "github.com/rai-project/config"
   packages = ["."]
   pruneopts = "UT"
-  revision = "bda75afee8119847b35c86908259641b06f3fdb2"
+  revision = "d39524e3455d07b7db0a954c359e3ec64dda852a"
 
 [[projects]]
   branch = "master"
@@ -864,11 +864,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:cbcd59bda78229bab16d8f2f63a11541853f9f6ab3f48b926db0c9ebc29162b9"
+  digest = "0:"
   name = "github.com/rai-project/server"
   packages = ["."]
   pruneopts = "UT"
-  revision = "8fa2d6eecbe138410e7f342fe5f83e1df9a433bf"
+  revision = "ababb8cdfaae37488576342c6ed62774fc7b0a53"
 
 [[projects]]
   branch = "master"
