@@ -69,6 +69,10 @@
   branch = "master"
   name = "github.com/spf13/viper"
 
+[[override]]
+  branch = "master"
+  name = "github.com/russross/blackfriday"
+
 [[constraint]]
   name = "github.com/vrecan/death"
   version = "2.0.0"
