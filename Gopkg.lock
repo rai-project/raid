@@ -37,6 +37,14 @@
   revision = "83e8b8723a9bf39481216e80575f4854c63ece4a"
 
 [[projects]]
+  branch = "master"
+  digest = "0:"
+  name = "github.com/Masterminds/semver"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "c84ddcca87bf5a941b138dde832a7e20b0159ad8"
+
+[[projects]]
   digest = "1:f9ae348e1f793dcf9ed930ed47136a67343dbd6809c5c91391322267f4476892"
   name = "github.com/Microsoft/go-winio"
   packages = ["."]
@@ -117,8 +125,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "97ab38e1626747eaa660ff7e5e7d3f1a37172b36"
-  version = "v1.19.9"
+  revision = "53e87fccca39c3e7d20e5172dbe66aa13ff55d12"
+  version = "v1.19.10"
 
 [[projects]]
   digest = "1:780d1a5df3a9a227bf07e7beb6c851ec6ad2614555b1d015d9e2f136d13ad8a7"
@@ -600,7 +608,7 @@
     "pkg/sys",
   ]
   pruneopts = "UT"
-  revision = "6d7e0187a8f5cb7a74b8e97ff59315907ab26484"
+  revision = "979309148e862c66be83d649b5185c4a9604cd8c"
 
 [[projects]]
   branch = "master"
@@ -884,7 +892,7 @@
   name = "github.com/rai-project/server"
   packages = ["."]
   pruneopts = "UT"
-  revision = "3df02cdb39fb05ff1fe06437bbed23ff7b9327f7"
+  revision = "719249f171c1a98f5039d200b9529c00a928b124"
 
 [[projects]]
   branch = "master"
