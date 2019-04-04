@@ -600,7 +600,7 @@
     "pkg/sys",
   ]
   pruneopts = "UT"
-  revision = "9c196d20cfee4983bcf380369b21f47dbc1da5e2"
+  revision = "6d7e0187a8f5cb7a74b8e97ff59315907ab26484"
 
 [[projects]]
   branch = "master"
@@ -884,7 +884,7 @@
   name = "github.com/rai-project/server"
   packages = ["."]
   pruneopts = "UT"
-  revision = "44d0215b65f07a54bec9cd031570203e0a1b5741"
+  revision = "077691b86c50a0136db318fd8cef11cf0b5c4b03"
 
 [[projects]]
   branch = "master"
