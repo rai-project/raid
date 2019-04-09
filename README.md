@@ -87,12 +87,17 @@ Create an S3 bucket using the AWS console
 
 ### MongoDB
 
+
 Create a mongodb to store submissions from the client.
 
 -   Create a security group that allows ssh (port 22) and mongodb (port 27017)
 -   Create an AWS EC2 instance to run the database and add it to that security group
 
-Install docker
+
+Information on how to install on an Ubuntu installation can be found [here](https://optimalbi.com/blog/2017/09/14/how-to-install-mongodb-with-aws-ec2/).
+
+
+#### Using docker
 
     curl -fsSL get.docker.com -o get-docker.sh | sudo sh
     sudo usermod -aG docker $USER
@@ -138,6 +143,36 @@ To backup the database, instructions from [here]:(https://docs.mongodb.com/manua
     sudo apt update
     sudo apt install mongodb-org-tools
     mongodump -h localhost:27017 -u rai-root -p rai-root-password --authenticationDatabase admin
+
+#### Change Bind Port
+
+You also need to change the listen address of the server.
+
+```
+sudo vim /etc/mongod.conf
+```
+
+and locate the `bindIp` line. It should look like
+
+```
+net:
+  port: 27017
+  bindIp: 127.0.0.1
+```
+
+change it so that the `bindIp` is `0.0.0.0`
+
+```
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+```
+
+and then restart the server
+
+```
+sudo service mongod restart
+```
 
 ### Redis Server
 
