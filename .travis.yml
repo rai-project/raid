@@ -28,7 +28,7 @@ before_install:
   - go get github.com/client9/misspell/cmd/misspell
   - go get -u github.com/goreleaser/nfpm/...
   - go get github.com/aktau/github-release
-  - go get -d github.com/goreleaser/goreleaser
+  - go get github.com/goreleaser/goreleaser
   - go install github.com/goreleaser/goreleaser
   - cd ${TRAVIS_BUILD_DIR}
   - sed -i "s/\${APP_SECRET}/${APP_SECRET}/" ${TRAVIS_BUILD_DIR}/.goreleaser.yml
@@ -81,5 +81,4 @@ deploy:
     repo: rai-project/raid
 env:
   global:
-    GO111MODULE: off
     secure: tf8wXElHB7N6RmHIGLzfr/K4XUlDdwIGRMuXSXnbk9bHf7t5rKGbhj3Ogbbf8/Myg4BnAnPtV7fvQL7+0KPc+9lUY5XVBIFGm5W77p85NKVVwxTT1jRtWPhuXPUQOjT5v9WQcfoHMqUNU31uJErzdo891JHENNSYbouZENec/gxbYyNAoCkcAUG1mqLHDPyUrOo6WtH5iFJm2I7GU1R590/UAJU69WRX6Aeuv2jfJYIslXxNH0AxztzDGIsgsGE8dbmosQdTmQncIHmxriNsfUjO6UvQFbJBxez+5w/xAVVgdW5Yquy8ckRhxP5sYrpiopA8oOSuCEAKyi16lGD4Jn+7N4tLA+r11qMyud7UEvcCua1BzmQXu6zRkVf3u3aWSH4LcUYozUUYXQWvWUa9Tz9ZyM4/isgxHrzUdruQDMzLaFKyydVjVyVghvmQe6PI+AdVwUXXuk0r7TKFL84B6GLMx4hN+CST5xEE9QVkSWU/iQzqCsB8J2FUBdIbLJufih9ebcw55NWjGfCjYghrLihOkyw0tYPdRdkgG82UZH2sDhy0pSQSCiguOqKmMgix8ymwdlG/IcGKqVECY5yFDgnhdxd/7gt6eX69nMZbBmBKqJ3f4G3FhGc6TU/LxMllsVktMD7IxUwP7hu3JLMzHiG0iYrS4fc6ERIWbONicrA=
